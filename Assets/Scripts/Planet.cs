@@ -7,9 +7,10 @@ public class Planet : SelectableObject {
 
 	public float speed;
 	public float radius;
-	
-	public const float maxSpeed = 0.01f;
-	public const float minSpeed = 0.2f;
+	private float angularVelocity;
+
+	public const float maxSpeed = 0.2f;
+	public const float minSpeed = 2f;
 
 	public Mine minePrefab;
 
@@ -37,6 +38,8 @@ public class Planet : SelectableObject {
 
 			renderer.material.mainTexture = textures[rndRngVal];
 		}
+
+		angularVelocity = speed / radius;
 	}
 
 	public int harvestEnergy() {
@@ -44,7 +47,7 @@ public class Planet : SelectableObject {
 	}
 
 	private void Update() {
-		float angle = Time.time * speed;
+		float angle = Time.time * angularVelocity;
 		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}
 
@@ -62,9 +65,11 @@ public class Planet : SelectableObject {
 	public override void OnOptionSelected (string option)
 	{
 		if (option == OPTION_BUILD_MINE && numBuildings < 4) {
-			Vector3[] positions = {new Vector3(0, 0.5f, 0), new Vector3(0.5f, 0, 0), new Vector3(0, -0.5f, 0), new Vector3(-0.5f, 0, 0)};
+			float rad = (transform.eulerAngles.z + 90 * numBuildings) * Mathf.Deg2Rad;
+			Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
 			Mine mine = Instantiate(minePrefab) as Mine;
-			mine.transform.position = transform.position + positions[numBuildings];
+			mine.transform.position = transform.position + pos;
+			mine.transform.eulerAngles = transform.eulerAngles;
 			mine.transform.parent = transform;
 
 			numBuildings++;
