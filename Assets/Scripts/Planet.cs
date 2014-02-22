@@ -24,8 +24,7 @@ public class Planet : SelectableObject {
 	private static string OPTION_BUILD_MINE = "Build Mine";
 
 	new private void Start() {
-		Debug.Log ("Planet.Start()");
-		base.Start ();
+		base.Start();
 		parent = transform.parent.gameObject;
 		if (gameObject.name == "Earth")
 			renderer.material.mainTexture = textures[4];
