@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void addCelestialBody(Celestial celest) {
-		celestialBodies.Add (celest);
+		celestialBodies.Add(celest);
 	}
 
 	public void turnFinish () {
@@ -25,7 +25,6 @@ public class Player : MonoBehaviour {
 		foreach (Planet p in planets) {
 			resources += p.harvestEnergy();
 		}
-
 		
 		for (int i=0; i<celestialBodies.Count; i++) {
 			Celestial c = celestialBodies[i];
@@ -36,7 +35,6 @@ public class Player : MonoBehaviour {
 				c.nextState();
 				i--;
 			}
-
 		}
 	}
 
