@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
-
+	
+	public int turnNumber = 0;
 	public Hashtable resources;
 	public List<Planet> planets;
 
@@ -15,6 +16,16 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-	
+		
+	}
+
+	public void turnFinish () {
+		turnNumber++;
+
+
+	}
+
+	public void turnStart() {
+
 	}
 }
