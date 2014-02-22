@@ -11,7 +11,10 @@ public abstract class Celestial : SelectableObject {
 	public string nextStarState;
 	public bool lblShowing = true;
 	private int bodyMass;
+
 	protected int prob = 50;
+	protected float starLabelOffset;
+	protected float transitionTime = 0.5f;
 
 	private int lblWidth = 80;
 	private int lblHeight = 100;
@@ -32,20 +35,34 @@ public abstract class Celestial : SelectableObject {
 //		gntStarStates = new string[] {"Stellar Nebula ", "Supermassive Star ", "Red SuperGiant ", "Planetary Nebula ", "White Dwarf "};
 	}
 
-	private void Update () {
+	protected void Update () {
 
 	}
 
-	private void OnGUI () {
-		Vector3 offset = new Vector3 (-transform.localScale.x * 2f, transform.localScale.y, 0);
-		var p = Camera.main.WorldToScreenPoint(transform.position + offset);
+	protected void OnGUI () {
+		Vector3 offset = new Vector3 (-transform.lossyScale.x * starLabelOffset, transform.lossyScale.y * Screen.height/30f, 0);
+		var p = Camera.main.WorldToScreenPoint(transform.position);
+		p += offset;
 
 		if (lblShowing) {
+			starLabelStyle.fontSize = Screen.width / 60;
+			starTypeStyle.fontSize = Screen.width / 50;
 			GUI.Box (new Rect(p.x,p.y,lblWidth,lblHeight), stateType, starTypeStyle);
-			GUI.Label(new Rect(p.x,p.y+25,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
+			GUI.Label(new Rect(p.x,p.y+Screen.height/20,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
 		}
 	}
 
+	protected void OnCollisionStay (Collision col) {
+		print(col.gameObject.name);
+		if (col.gameObject.tag != "Celestial")
+			Destroy(col.gameObject);
+	}
+
+	protected void OnCollisionEnter (Collision col) {
+		print(col.gameObject.name);
+		if (col.gameObject.tag != "Celestial")
+			Destroy(col.gameObject);
+	}
 
 	#region implemented abstract members of SelectableObject
 

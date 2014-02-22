@@ -9,6 +9,7 @@ public class RedGiant : Celestial {
 		
 		stateType = "Red Giant";
 		nextStarState = "Planetary Nebula";
+		starLabelOffset = 8f;
 	}
 	
 	override public void nextState() {
