@@ -15,7 +15,7 @@ GameObject:
   - 122: {fileID: 12200000}
   - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: Star
+  m_Name: WhiteDwarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
