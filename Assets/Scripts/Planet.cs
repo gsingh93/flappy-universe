@@ -8,7 +8,7 @@ public class Planet : SelectableObject {
 	public float speed;
 	public float radius;
 	private float angularVelocity;
-	
+
 	public const float maxSpeed = 0.2f;
 	public const float minSpeed = 2f;
 
@@ -25,7 +25,7 @@ public class Planet : SelectableObject {
 	private static string OPTION_BUILD_MINE = "Build Mine";
 
 	new private void Start() {
-		base.Start ();
+		base.Start();
 		parent = transform.parent.gameObject;
 		if (gameObject.name == "Earth")
 			renderer.material.mainTexture = textures[4];

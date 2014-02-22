@@ -5,6 +5,8 @@ public class HUD : MonoBehaviour {
 	public SelectableObject selectedObject;
 	public float u = 0.5f;
 
+	public float speed = 0.25f;
+
 	private Vector3 startPosition;
 	private Vector3 targetPosition;
 
@@ -12,8 +14,36 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 	}
 
+	public void Update() {
+		if (selectedObject == null) {
+			if (Input.GetKey(KeyCode.Z)) {
+				if (startPosition.z < -15) {
+					Camera.main.transform.position += Vector3.forward;
+				}
+				startPosition = transform.position;
+			} else if (Input.GetKey(KeyCode.X)) {
+				if (startPosition.z > -100) {
+					Camera.main.transform.position += Vector3.back;
+				}
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Horizontal") > 0) {
+				Camera.main.transform.position += speed * Vector3.right;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Horizontal") < 0) {
+				Camera.main.transform.position += speed * Vector3.left;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Vertical") > 0) {
+				Camera.main.transform.position += speed * Vector3.up;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Vertical") < 0) {
+				Camera.main.transform.position += speed * Vector3.down;
+				startPosition = transform.position;
+			}
+		}
+	}
+
 	private void LateUpdate() {
-		if (selectedObject != null) {
+		if (selectedObject != null) {			
 			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
 		} else {
 			targetPosition = startPosition;

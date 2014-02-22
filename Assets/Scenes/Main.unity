@@ -231,6 +231,7 @@ GameObject:
   - 81: {fileID: 1197561117}
   - 114: {fileID: 1197561122}
   - 114: {fileID: 1197561123}
+  - 114: {fileID: 1197561124}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -312,6 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   u: .5
+  speed: .699999988
 --- !u!114 &1197561123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +327,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnNumber: 0
   planets: []
+--- !u!114 &1197561124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197561116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e61f80cee606704c9898f59e23802a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +411,7 @@ GameObject:
   - 33: {fileID: 1733753479}
   - 135: {fileID: 1733753478}
   - 23: {fileID: 1733753477}
+  - 114: {fileID: 1733753481}
   - 122: {fileID: 1733753480}
   m_Layer: 0
   m_Name: Star
@@ -472,3 +486,16 @@ Halo:
     serializedVersion: 2
     rgba: 4285397758
   m_Size: 1.11000001
+--- !u!114 &1733753481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 199dfb69757681349a4696c7cb951d0d,
+    type: 2}
+  m_PrefabInternal: {fileID: 194931755}
+  m_GameObject: {fileID: 1733753475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a3b5c9a8bb7904ba77cbf5c3e08da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: .5
