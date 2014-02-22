@@ -5,7 +5,7 @@ public class Rotate : MonoBehaviour {
 	public float speed;
 
 	void Start() {
-		speed = 0.2 + Random.value;
+		speed = 0.2f + Random.value;
 	}
 
 	void Update() {
