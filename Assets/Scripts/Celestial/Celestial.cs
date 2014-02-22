@@ -10,22 +10,21 @@ public abstract class Celestial : SelectableObject {
 	public int curState = 1;
 	public string nextStarState;
 	public bool lblShowing = true;
-	private int bodyMass;
 
 	protected int prob = 50;
 	protected float starLabelOffset;
 	protected float transitionTime = 0.5f;
+	protected int bodyMass;
 
 	private int lblWidth = 80;
 	private int lblHeight = 100;
 
 	abstract public void nextState ();
 
-	protected void Start () {
+	new protected void Start () {
 		base.Start ();
 
 		turnsLeft = Random.Range (5, 15);
-		bodyMass = Random.Range (1, 2000);
 
 		Camera.main.GetComponent<Player> ().addCelestialBody(this);
 

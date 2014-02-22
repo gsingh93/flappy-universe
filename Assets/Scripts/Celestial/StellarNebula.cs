@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StellarNebula : Celestial {
 
-	private void Start () {
+	new private void Start () {
 		base.Start ();
 		
 		stateType = "Stellar Nebula";

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 
+	private const int buttonWidth = 150;
+	private const int maxZoom = -15;
+	private const int minZoom = -100;
+
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
 	{
@@ -16,6 +20,9 @@ public class HUD : MonoBehaviour {
 		}
 
 	}
+
+	public GUIStyle style = new GUIStyle();
+
 	public Player player;
 	public float u = 0.5f;
 
@@ -26,18 +33,19 @@ public class HUD : MonoBehaviour {
 
 	private void Start() {
 		startPosition = transform.position;
-		player = GetComponent<Player> ();
+		player = GetComponent<Player>();
+		style.fontSize = 31;
 	}
 
 	public void Update() {
 		if (selectedObject == null) {
 			if (Input.GetKey(KeyCode.Z)) {
-				if (startPosition.z < -15) {
+				if (startPosition.z < maxZoom) {
 					Camera.main.transform.position += Vector3.forward;
 				}
 				startPosition = transform.position;
 			} else if (Input.GetKey(KeyCode.X)) {
-				if (startPosition.z > -100) {
+				if (startPosition.z > minZoom) {
 					Camera.main.transform.position += Vector3.back;
 				}
 				startPosition = transform.position;
@@ -67,8 +75,9 @@ public class HUD : MonoBehaviour {
 	}
 
 	private void OnGUI () {
+		GUI.skin.button.wordWrap = true;
 		if (selectedObject != null) {
-			GUI.Box (new Rect (0, 0, 200, 150), selectedObject.getName() + "\n" + selectedObject.getDescription());
+			GUI.Box(new Rect (0, 0, 200, 150), selectedObject.getName() + "\n" + selectedObject.getDescription());
 
 			MenuOption[] options = selectedObject.getOptions();
 			for (int i = 0; i < options.Length; i++) {
@@ -76,7 +85,9 @@ public class HUD : MonoBehaviour {
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
 				}
-				if (GUI.Button (new Rect (20, 50 + 40*(i+1), 150, 20), buttonText)) {
+				float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
+				Debug.Log (height);
+				if (GUI.Button(new Rect (20, 50 + 40 * (i + 1), buttonWidth, height), buttonText)) {
 					selectedObject.OnOptionSelected(options[i]);
 				}
 				GUI.enabled = true;
@@ -87,10 +98,10 @@ public class HUD : MonoBehaviour {
 			}
 		}
 
-		if (GUI.Button(new Rect(Screen.width-110, Screen.height-30, 100, 20), "End Turn")) {
+		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "End Turn")) {
 			player.turnFinish();
 		}
 
-		GUI.Label (new Rect (10, Screen.height - 30, 100, 30), ("Energy: " + player.resources) );
+		GUI.Label(new Rect(10, Screen.height - 30, 100, 30), ("Energy: " + player.resources));
 	}
 }

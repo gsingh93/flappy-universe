@@ -5,7 +5,7 @@ public class Star : Celestial {
 	private GameObject redgiant;
 	private float finalScale;
 
-	private void Start () {
+	new private void Start () {
 		base.Start ();
 
 		stateType = "Yellow Star";
