@@ -8,9 +8,9 @@ public abstract class Celestial : SelectableObject {
 	public GUIStyle starLabelStyle;
 	public GUIStyle starTypeStyle;
 	public int curState = 1;
-	public string curStarState;
 	public string nextStarState;
-	public int bodyMass;
+	public bool lblShowing = true;
+	private int bodyMass;
 	protected int prob = 50;
 
 	private int lblWidth = 80;
@@ -36,13 +36,15 @@ public abstract class Celestial : SelectableObject {
 
 	}
 
-//	private void OnGUI () {
-//		Vector3 offset = new Vector3 (-transform.localScale.x * 2f, transform.localScale.y, 0);
-//		var p = Camera.main.WorldToScreenPoint(transform.position + offset);
-//
-//		GUI.Box (new Rect(p.x,p.y,lblWidth,lblHeight), stateType, starTypeStyle);
-//		GUI.Label(new Rect(p.x,p.y+25,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
-//	}
+	private void OnGUI () {
+		Vector3 offset = new Vector3 (-transform.localScale.x * 2f, transform.localScale.y, 0);
+		var p = Camera.main.WorldToScreenPoint(transform.position + offset);
+
+		if (lblShowing) {
+			GUI.Box (new Rect(p.x,p.y,lblWidth,lblHeight), stateType, starTypeStyle);
+			GUI.Label(new Rect(p.x,p.y+25,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
+		}
+	}
 
 
 	#region implemented abstract members of SelectableObject

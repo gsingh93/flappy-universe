@@ -2,7 +2,20 @@
 using System.Collections;
 
 public class HUD : MonoBehaviour {
-	public SelectableObject selectedObject;
+
+	private SelectableObject _selectedObject;
+	public SelectableObject selectedObject
+	{
+		get { return _selectedObject; }
+		set {
+			_selectedObject = value;
+			if (value == null)
+				player.showLabels();
+			else
+				player.hideLabels();
+		}
+
+	}
 	public Player player;
 	public float u = 0.5f;
 
@@ -45,7 +58,7 @@ public class HUD : MonoBehaviour {
 	}
 
 	private void LateUpdate() {
-		if (selectedObject != null) {			
+		if (selectedObject != null) {
 			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
 		} else {
 			targetPosition = startPosition;

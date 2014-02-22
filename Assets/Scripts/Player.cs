@@ -44,5 +44,16 @@ public class Player : MonoBehaviour {
 
 	}
 
+	public void hideLabels() {
+		foreach (Celestial c in celestialBodies) {
+			c.lblShowing = false;
+		}
+	}
+	
+	public void showLabels() {
+		foreach (Celestial c in celestialBodies) {
+			c.lblShowing = true;
+		}
+	}
 
 }
