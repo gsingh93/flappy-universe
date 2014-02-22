@@ -12,7 +12,7 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 	}
 
-	private void FixedUpdate() {
+	private void LateUpdate() {
 		if (selectedObject != null) {
 			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
 		} else {

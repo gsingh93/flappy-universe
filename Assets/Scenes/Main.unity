@@ -312,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   u: .5
+<<<<<<< HEAD
 --- !u!114 &1197561123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planets: []
+=======
+>>>>>>> 30e32f3cec2ce6bc3d1d880bbd5414b8029dd6f0
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +400,7 @@ GameObject:
   - 33: {fileID: 1733753479}
   - 135: {fileID: 1733753478}
   - 23: {fileID: 1733753477}
+  - 122: {fileID: 1733753480}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -459,3 +463,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 194931755}
   m_GameObject: {fileID: 1733753475}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!122 &1733753480
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733753475}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4285397758
+  m_Size: 1.11000001
