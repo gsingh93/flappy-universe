@@ -27,7 +27,17 @@ public class Planet : SelectableObject {
 		Debug.Log ("Planet.Start()");
 		base.Start ();
 		parent = transform.parent.gameObject;
-		renderer.material.mainTexture = textures[Random.Range(0, textures.Length)];
+		if (gameObject.name == "Earth")
+			renderer.material.mainTexture = textures[4];
+		else {
+			int rndRngVal = Random.Range(0, textures.Length);
+
+			while (rndRngVal == 4) {
+				rndRngVal = Random.Range(0, textures.Length);
+			}
+
+			renderer.material.mainTexture = textures[rndRngVal];
+		}
 	}
 
 	private void Update() {
