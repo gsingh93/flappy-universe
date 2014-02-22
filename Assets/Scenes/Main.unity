@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68f2a67b850b4ad79b64cb00a4b399d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnNumber: 0
   planets: []
 --- !u!1 &1584683032
 GameObject:
