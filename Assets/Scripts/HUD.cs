@@ -15,28 +15,30 @@ public class HUD : MonoBehaviour {
 	}
 
 	public void Update() {
-		if (Input.GetKey(KeyCode.Z)) {
-			if (startPosition.z < -15) {
-				Camera.main.transform.position += Vector3.forward;
+		if (selectedObject == null) {
+			if (Input.GetKey(KeyCode.Z)) {
+				if (startPosition.z < -15) {
+					Camera.main.transform.position += Vector3.forward;
+				}
+				startPosition = transform.position;
+			} else if (Input.GetKey(KeyCode.X)) {
+				if (startPosition.z > -100) {
+					Camera.main.transform.position += Vector3.back;
+				}
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Horizontal") > 0) {
+				Camera.main.transform.position += speed * Vector3.right;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Horizontal") < 0) {
+				Camera.main.transform.position += speed * Vector3.left;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Vertical") > 0) {
+				Camera.main.transform.position += speed * Vector3.up;
+				startPosition = transform.position;
+			} else if (Input.GetAxis("Vertical") < 0) {
+				Camera.main.transform.position += speed * Vector3.down;
+				startPosition = transform.position;
 			}
-			startPosition = transform.position;
-		} else if (Input.GetKey(KeyCode.X)) {
-			if (startPosition.z > -100) {
-				Camera.main.transform.position += Vector3.back;
-			}
-			startPosition = transform.position;
-		} else if (Input.GetAxis("Horizontal") > 0) {
-			Camera.main.transform.position += speed * Vector3.right;
-			startPosition = transform.position;
-		} else if (Input.GetAxis("Horizontal") < 0) {
-			Camera.main.transform.position += speed * Vector3.left;
-			startPosition = transform.position;
-		} else if (Input.GetAxis("Vertical") > 0) {
-			Camera.main.transform.position += speed * Vector3.up;
-			startPosition = transform.position;
-		} else if (Input.GetAxis("Vertical") < 0) {
-			Camera.main.transform.position += speed * Vector3.down;
-			startPosition = transform.position;
 		}
 	}
 
