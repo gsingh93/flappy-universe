@@ -16,14 +16,11 @@ public class Planet : SelectableObject {
 		}
 	}
 
-	public float speed;
-	public float radius;
-	private float angularVelocity;
-
 	public const float maxSpeed = 0.2f;
 	public const float minSpeed = 2f;
 
 	public Mine minePrefab;
+	public Ship shipPrefab;
 
 	public float mineCost;
 
@@ -31,19 +28,18 @@ public class Planet : SelectableObject {
 
 	public Vector2 origin;
 
-	private GameObject parent;
-
 	private int numBuildings = 0;
-	public int totalResources = 100;
+	public int totalResources = 200;
 
 	private static string OPTION_BUILD_MINE = "Build Mine";
+	private static string OPTION_BUILD_SHIP = "Build Ship";
 	private static MenuOption[] options = {
-		new MenuOption (OPTION_BUILD_MINE, 25)
+		new MenuOption (OPTION_BUILD_MINE, 25),
+		new MenuOption (OPTION_BUILD_SHIP, 100)
 	};
 
 	new private void Start() {
-		base.Start();
-		parent = transform.parent.gameObject;
+		base.Start ();
 		if (gameObject.name == "Earth")
 			renderer.material.mainTexture = textures[4];
 		else {
@@ -55,23 +51,16 @@ public class Planet : SelectableObject {
 
 			renderer.material.mainTexture = textures[rndRngVal];
 		}
-
-		angularVelocity = speed / radius;
 	}
 
 	private int energyPerTurn() {
-		return Mathf.Min(10 * numBuildings, totalResources);
+		return Mathf.Min(20 * numBuildings, totalResources);
 	}
 
 	public int harvestEnergy() {
 		int numResources = energyPerTurn ();
 		totalResources -= numResources;
 		return numResources;
-	}
-
-	private void Update() {
-		float angle = Time.time * angularVelocity;
-		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}
 
 	#region implemented abstract members of SelectableObject
@@ -105,9 +94,10 @@ public class Planet : SelectableObject {
 		if (numBuildings >= 4 || option.cost > player.resources) {
 			return;
 		}
-		if (option.name == OPTION_BUILD_MINE) {
-			player.resources -= option.cost;
 
+		player.resources -= option.cost;
+
+		if (option.name == OPTION_BUILD_MINE) {
 			float rad = (transform.eulerAngles.z + 90 * numBuildings) * Mathf.Deg2Rad;
 			Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
 			Mine mine = Instantiate(minePrefab) as Mine;
@@ -116,6 +106,10 @@ public class Planet : SelectableObject {
 			mine.transform.parent = transform;
 
 			numBuildings++;
+		} else if (option.name == OPTION_BUILD_SHIP) {
+			Ship ship = Instantiate(shipPrefab) as Ship;
+			ship.transform.position = transform.position;
+			ship.transform.parent = this.transform;
 		}
 	}
 	#endregion

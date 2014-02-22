@@ -17,6 +17,6 @@ public abstract class SelectableObject : MonoBehaviour {
 
 	public abstract string getName();
 	public abstract string getDescription();
-	public abstract MenuOption[] getOptions();
-	public abstract void OnOptionSelected(MenuOption option);
+	public virtual MenuOption[] getOptions() { return new MenuOption[0]; }
+	public virtual void OnOptionSelected(MenuOption option) {}
 }

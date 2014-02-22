@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	
 	public int turnNumber = 0;
-	public int resources = 100;
+	public int resources = 50;
 	public List<Planet> planets;
 
 	public List<Celestial> celestialBodies;

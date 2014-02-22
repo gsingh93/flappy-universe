@@ -4,7 +4,7 @@ using System.Collections;
 public class RedGiant : Celestial {
 
 
-	private void Start () {
+	new private void Start () {
 		base.Start ();
 		
 		stateType = "Red Giant";

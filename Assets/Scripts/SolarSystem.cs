@@ -22,8 +22,9 @@ public class SolarSystem : MonoBehaviour {
 		for (int i = 1; i <= numPlanets; i++) {
 			Planet planet = Instantiate(planetPrefab) as Planet;
 			planet.transform.parent = transform;
-			planet.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
-			planet.radius = i * 2;
+			Revolve revolution = planet.GetComponent<Revolve>();
+			revolution.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
+			revolution.radius = i * 2;
 
 			if (ourSolarSystem && i < 9) {
 				if (ourPlanets[i-1] == "Earth") {

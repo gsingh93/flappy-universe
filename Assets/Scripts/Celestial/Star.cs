@@ -4,7 +4,7 @@ using System.Collections;
 public class Star : Celestial {
 
 
-	private void Start () {
+	new private void Start () {
 		base.Start ();
 
 		stateType = "Yellow Star";

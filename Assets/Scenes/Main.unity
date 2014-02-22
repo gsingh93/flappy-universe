@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnNumber: 0
-  resources: 100
+  resources: 50
   planets: []
   celestialBodies: []
 --- !u!114 &1197561124
