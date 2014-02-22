@@ -11,13 +11,20 @@ public class Planet : SelectableObject {
 	public const float maxSpeed = 0.01f;
 	public const float minSpeed = 0.2f;
 
+	public Mine minePrefab;
+
 	public Texture[] textures;
 
 	public Vector2 origin;
 
 	private GameObject parent;
 
+	private int numBuildings = 0;
+
+	private static string OPTION_BUILD_MINE = "Build Mine";
+
 	new private void Start() {
+		Debug.Log ("Planet.Start()");
 		base.Start ();
 		parent = transform.parent.gameObject;
 		renderer.material.mainTexture = textures[Random.Range(0, textures.Length)];
@@ -36,12 +43,19 @@ public class Planet : SelectableObject {
 
 	public override string[] getOptions ()
 	{
-		return new string[] {"Build Mine"};
+		return new string[] {OPTION_BUILD_MINE};
 	}
 
 	public override void OnOptionSelected (string option)
 	{
-		Debug.Log ("Planet " + planetName + " selected option " + option);
+		if (option == OPTION_BUILD_MINE && numBuildings < 4) {
+			Vector3[] positions = {new Vector3(0, 0.5f, 0), new Vector3(0.5f, 0, 0), new Vector3(0, -0.5f, 0), new Vector3(-0.5f, 0, 0)};
+			Mine mine = Instantiate(minePrefab) as Mine;
+			mine.transform.position = transform.position + positions[numBuildings];
+			mine.transform.parent = transform;
+
+			numBuildings++;
+		}
 	}
 	#endregion
 }
