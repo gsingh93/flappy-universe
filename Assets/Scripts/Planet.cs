@@ -5,7 +5,16 @@ public class Planet : SelectableObject {
 	public string planetName;
 	public bool buttonClicked = false;
 
-	public bool claimed;
+	private bool _claimed;
+	public bool claimed {
+		set {
+			_claimed = value;
+			(gameObject.GetComponent("Halo") as Behaviour).enabled = _claimed;
+		}
+		get {
+			return _claimed;
+		}
+	}
 
 	public float speed;
 	public float radius;
