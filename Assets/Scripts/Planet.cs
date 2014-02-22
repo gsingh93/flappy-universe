@@ -39,6 +39,10 @@ public class Planet : SelectableObject {
 		}
 	}
 
+	public int harvestEnergy() {
+		return 10 * numBuildings;
+	}
+
 	private void Update() {
 		float angle = Time.time * speed;
 		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
