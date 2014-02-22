@@ -192,7 +192,7 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: .992156863, g: .984313726, b: .376470596, a: 1}
-  m_Intensity: 1.51999998
+  m_Intensity: .980000019
   m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -204,7 +204,7 @@ Light:
     m_Softness: 4
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 1
+  m_DrawHalo: 0
   m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -230,7 +230,6 @@ GameObject:
   - 124: {fileID: 1197561118}
   - 81: {fileID: 1197561117}
   - 114: {fileID: 1197561122}
-  - 114: {fileID: 1197561123}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -312,21 +311,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   u: .5
-<<<<<<< HEAD
---- !u!114 &1197561123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1197561116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68f2a67b850b4ad79b64cb00a4b399d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planets: []
-=======
->>>>>>> 30e32f3cec2ce6bc3d1d880bbd5414b8029dd6f0
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0

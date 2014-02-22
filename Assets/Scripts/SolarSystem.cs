@@ -21,7 +21,7 @@ public class SolarSystem : MonoBehaviour {
 			planet.transform.parent = transform;
 			planet.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
 			planet.radius = i * 2;
-			if (ourSolarSystem)
+			if (ourSolarSystem && i < 9)
 				planet.planetName = ourPlanets[i-1];
 		}
 	}
