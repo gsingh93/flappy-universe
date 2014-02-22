@@ -4,24 +4,26 @@ using System.Collections;
 public class Planet : MonoBehaviour {
     public string planetName;
 
-	public int speed;
-	public int radius;
+	public float speed;
+	public float radius;
 
-    public const int maxSpeed = 1;
-	public const int minSpeed = 5;
+    public const float maxSpeed = 0.5f;
+	public const float minSpeed = 1f;
 
     private GameObject parent;
 
 	public bool buttonClicked = false;
 
+	public Texture[] textures;
+
 	public Vector2 origin;
 
-	// Use this for initialization
-	private void Start () {
+	private void Start() {
 	    parent = transform.parent.gameObject;
+		renderer.material.mainTexture = textures[Random.Range(0, textures.Length)];
 	}
 	
-	private void Update () {
+	private void Update() {
 		float angle = Time.time * speed;
 		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}

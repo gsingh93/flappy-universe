@@ -16,7 +16,7 @@ public class SolarSystem : MonoBehaviour {
 		for (int i = 0; i < numPlanets; i++) {
 			Planet planet = Instantiate(planetPrefab) as Planet;
 			planet.transform.parent = transform;
-			planet.speed = Random.Range(Planet.minSpeed, Planet.maxSpeed);
+			planet.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
 			planet.radius = i * 2;
 		}
 	}
