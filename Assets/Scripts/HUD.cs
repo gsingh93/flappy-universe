@@ -63,7 +63,7 @@ public class HUD : MonoBehaviour {
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
 				}
-				if (GUI.Button (new Rect (20, 40*(i+1), 150, 20), buttonText)) {
+				if (GUI.Button (new Rect (20, 50 + 40*(i+1), 150, 20), buttonText)) {
 					selectedObject.OnOptionSelected(options[i]);
 				}
 				GUI.enabled = true;

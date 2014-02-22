@@ -25,6 +25,7 @@ public class Planet : SelectableObject {
 	private GameObject parent;
 
 	private int numBuildings = 0;
+	public int totalResources = 100;
 
 	private static string OPTION_BUILD_MINE = "Build Mine";
 	private static MenuOption[] options = {
@@ -49,8 +50,14 @@ public class Planet : SelectableObject {
 		angularVelocity = speed / radius;
 	}
 
+	private int energyPerTurn() {
+		return Mathf.Min(10 * numBuildings, totalResources);
+	}
+
 	public int harvestEnergy() {
-		return 10 * numBuildings;
+		int numResources = energyPerTurn ();
+		totalResources -= numResources;
+		return numResources;
 	}
 
 	private void Update() {
@@ -67,7 +74,9 @@ public class Planet : SelectableObject {
 	public override string getDescription ()
 	{
 		if (claimed) {
-			return (4-numBuildings) + " empty building slots";
+			return (4-numBuildings) + " empty building slots.\n" +
+				"+" + energyPerTurn() + " energy per turn.\n" +
+				totalResources + " minerals remaining in planet";
 		} else {
 			return "You haven't claimed this planet.";
 		}
