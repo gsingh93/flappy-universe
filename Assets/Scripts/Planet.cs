@@ -5,6 +5,8 @@ public class Planet : SelectableObject {
 	public string planetName;
 	public bool buttonClicked = false;
 
+	public bool claimed;
+
 	public float speed;
 	public float radius;
 	private float angularVelocity;
@@ -13,6 +15,8 @@ public class Planet : SelectableObject {
 	public const float minSpeed = 2f;
 
 	public Mine minePrefab;
+
+	public float mineCost;
 
 	public Texture[] textures;
 
@@ -23,6 +27,9 @@ public class Planet : SelectableObject {
 	private int numBuildings = 0;
 
 	private static string OPTION_BUILD_MINE = "Build Mine";
+	private static MenuOption[] options = {
+		new MenuOption (OPTION_BUILD_MINE, 25)
+	};
 
 	new private void Start() {
 		base.Start();
@@ -57,14 +64,32 @@ public class Planet : SelectableObject {
 		return planetName;
 	}
 
-	public override string[] getOptions ()
+	public override string getDescription ()
 	{
-		return new string[] {OPTION_BUILD_MINE};
+		if (claimed) {
+			return (4-numBuildings) + " empty building slots";
+		} else {
+			return "You haven't claimed this planet.";
+		}
 	}
 
-	public override void OnOptionSelected (string option)
+	public override MenuOption[] getOptions ()
 	{
-		if (option == OPTION_BUILD_MINE && numBuildings < 4) {
+		if (claimed) {
+			return options;
+		} else {
+			return new MenuOption[0];
+		}
+	}
+
+	public override void OnOptionSelected (MenuOption option)
+	{
+		if (numBuildings >= 4 || option.cost > player.resources) {
+			return;
+		}
+		if (option.name == OPTION_BUILD_MINE) {
+			player.resources -= option.cost;
+
 			float rad = (transform.eulerAngles.z + 90 * numBuildings) * Mathf.Deg2Rad;
 			Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
 			Mine mine = Instantiate(minePrefab) as Mine;

@@ -27,7 +27,7 @@ public class SolarSystem : MonoBehaviour {
 
 			if (ourSolarSystem && i < 9) {
 				if (ourPlanets[i-1] == "Earth") {
-					Camera.main.GetComponent<Player> ().planets.Add(planet);
+					Camera.main.GetComponent<Player> ().claimPlanet(planet);
 				}
 				planet.planetName = ourPlanets[i-1];
 				planet.gameObject.name = ourPlanets[i-1];

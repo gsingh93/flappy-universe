@@ -8,14 +8,9 @@ public class Player : MonoBehaviour {
 	public int resources = 100;
 	public List<Planet> planets;
 
-	// Use this for initialization
-	private void Start () {
-
-	}
-	
-	// Update is called once per frame
-	private void Update () {
-		
+	public void claimPlanet(Planet planet) {
+		planets.Add (planet);
+		planet.claimed = true;
 	}
 
 	public void turnFinish () {

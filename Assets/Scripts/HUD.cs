@@ -55,13 +55,18 @@ public class HUD : MonoBehaviour {
 
 	private void OnGUI () {
 		if (selectedObject != null) {
-			GUI.Box (new Rect (0, 0, 200, 150), selectedObject.getName());
+			GUI.Box (new Rect (0, 0, 200, 150), selectedObject.getName() + "\n" + selectedObject.getDescription());
 
-			string[] options = selectedObject.getOptions();
+			MenuOption[] options = selectedObject.getOptions();
 			for (int i = 0; i < options.Length; i++) {
-				if (GUI.Button (new Rect (20, 40*(i+1), 150, 20), options[i])) {
+				string buttonText = options[i].name + " (" + options[i].cost + " energy)";
+				if (player.resources < options[i].cost) {
+					GUI.enabled = false;
+				}
+				if (GUI.Button (new Rect (20, 40*(i+1), 150, 20), buttonText)) {
 					selectedObject.OnOptionSelected(options[i]);
 				}
+				GUI.enabled = true;
 			}
 
 			if (GUI.Button(new Rect(180, 0, 20, 20), "x")) {
