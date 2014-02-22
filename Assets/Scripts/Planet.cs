@@ -4,7 +4,15 @@ using System.Collections.Generic;
 
 public class Planet : SelectableObject {
 	public string planetName;
-	public bool buttonClicked = false;
+
+	public const float maxSpeed = 0.2f;
+	public const float minSpeed = 2f;
+
+	public SolarPanel solarPanelPrefab;
+	public Mine minePrefab;
+	public Ship shipPrefab;
+	
+	public Texture[] textures;
 
 	private bool _claimed;
 	public bool claimed {
@@ -16,18 +24,6 @@ public class Planet : SelectableObject {
 			return _claimed;
 		}
 	}
-
-	public const float maxSpeed = 0.2f;
-	public const float minSpeed = 2f;
-
-	public Mine minePrefab;
-	public Ship shipPrefab;
-
-	public float mineCost;
-
-	public Texture[] textures;
-
-	public Vector2 origin;
 	
 	public int totalResources = 200;
 	public int totalSlots = 4;
@@ -35,9 +31,11 @@ public class Planet : SelectableObject {
 	private List<Resource> resources = new List<Resource>();
 
 	private static string OPTION_BUILD_MINE = "Build Mine";
+	private static string OPTION_BUILD_SOLAR_PANEL = "Build Solar Panel";
 	private static string OPTION_BUILD_SHIP = "Build Ship";
 	private static MenuOption[] options = {
 		new MenuOption (OPTION_BUILD_MINE, 25),
+		new MenuOption (OPTION_BUILD_SOLAR_PANEL, 25),
 		new MenuOption (OPTION_BUILD_SHIP, 100)
 	};
 
@@ -91,6 +89,14 @@ public class Planet : SelectableObject {
 		}
 	}
 
+	private void PlaceResource(Resource r) {
+		float rad = (transform.eulerAngles.z + 90 * resources.Count) * Mathf.Deg2Rad;
+		Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
+		r.transform.position = transform.position + pos;
+		r.transform.eulerAngles = transform.eulerAngles;
+		r.transform.parent = transform;
+	}
+
 	public override void OnOptionSelected(MenuOption option) {
 		if (resources.Count >= totalSlots || option.cost > player.resources) {
 			return;
@@ -98,14 +104,13 @@ public class Planet : SelectableObject {
 
 		player.resources -= option.cost;
 		if (option.name == OPTION_BUILD_MINE) {
-			float rad = (transform.eulerAngles.z + 90 * resources.Count) * Mathf.Deg2Rad;
-			Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
 			Mine mine = Instantiate(minePrefab) as Mine;
-			mine.transform.position = transform.position + pos;
-			mine.transform.eulerAngles = transform.eulerAngles;
-			mine.transform.parent = transform;
-
+			PlaceResource(mine);
 			resources.Add(mine);
+		} if (option.name == OPTION_BUILD_SOLAR_PANEL) {
+			SolarPanel panel = Instantiate(solarPanelPrefab) as SolarPanel;
+			PlaceResource(panel);
+			resources.Add(panel);
 		} else if (option.name == OPTION_BUILD_SHIP) {
 			Ship ship = Instantiate(shipPrefab) as Ship;
 			ship.transform.position = transform.position;
