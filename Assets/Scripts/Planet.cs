@@ -98,16 +98,16 @@ public class Planet : SelectableObject {
 	}
 
 	public override void OnOptionSelected(MenuOption option) {
-		if (resources.Count >= totalSlots || option.cost > player.resources) {
+		if (option.cost > player.resources) {
 			return;
 		}
 
 		player.resources -= option.cost;
-		if (option.name == OPTION_BUILD_MINE) {
+		if (option.name == OPTION_BUILD_MINE && resources.Count < totalSlots) {
 			Mine mine = Instantiate(minePrefab) as Mine;
 			PlaceResource(mine);
 			resources.Add(mine);
-		} if (option.name == OPTION_BUILD_SOLAR_PANEL) {
+		} if (option.name == OPTION_BUILD_SOLAR_PANEL  && resources.Count < totalSlots) {
 			SolarPanel panel = Instantiate(solarPanelPrefab) as SolarPanel;
 			PlaceResource(panel);
 			resources.Add(panel);
