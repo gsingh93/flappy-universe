@@ -7,9 +7,10 @@ public class Planet : SelectableObject {
 
 	public float speed;
 	public float radius;
+	private float angularVelocity;
 	
-	public const float maxSpeed = 0.01f;
-	public const float minSpeed = 0.2f;
+	public const float maxSpeed = 0.2f;
+	public const float minSpeed = 2f;
 
 	public Mine minePrefab;
 
@@ -24,7 +25,6 @@ public class Planet : SelectableObject {
 	private static string OPTION_BUILD_MINE = "Build Mine";
 
 	new private void Start() {
-		Debug.Log ("Planet.Start()");
 		base.Start ();
 		parent = transform.parent.gameObject;
 		if (gameObject.name == "Earth")
@@ -38,6 +38,8 @@ public class Planet : SelectableObject {
 
 			renderer.material.mainTexture = textures[rndRngVal];
 		}
+
+		angularVelocity = speed / radius;
 	}
 
 	public int harvestEnergy() {
@@ -45,7 +47,7 @@ public class Planet : SelectableObject {
 	}
 
 	private void Update() {
-		float angle = Time.time * speed;
+		float angle = Time.time * angularVelocity;
 		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}
 
