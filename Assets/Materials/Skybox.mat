@@ -78,8 +78,4 @@ Material:
       data:
         first:
           name: _Tint
-<<<<<<< HEAD
         second: {r: .338235319, g: .338235319, b: .338235319, a: .501960814}
-=======
-        second: {r: .5, g: .5, b: .5, a: .5}
->>>>>>> ac5a9191600584dd29c7af36c1937cb3fd67f2d3
