@@ -2,16 +2,18 @@
 using System.Collections;
 
 public class Planet : MonoBehaviour {
-	public string planetName;
+       	public string planetName;
+
+	public int speed;
+	public int radius;
 
 	// Use this for initialization
 	private void Start () {
-	
+
 	}
 	
-	// Update is called once per frame
 	private void Update () {
-	
+		transform.position = radius * new Vector3(Mathf.Cos(Time.time), Mathf.Sin(Time.time), 0);
 	}
 
 	void OnMouseDown() {
