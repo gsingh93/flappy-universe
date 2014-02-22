@@ -7,13 +7,19 @@ public class Planet : MonoBehaviour {
 	public int speed;
 	public int radius;
 
+    public const int maxSpeed = 1;
+	public const int minSpeed = 5;
+
+    GameObject parent;
+
 	// Use this for initialization
 	private void Start () {
-
+	    parent = transform.parent.gameObject;
 	}
 	
 	private void Update () {
-		transform.position = radius * new Vector3(Mathf.Cos(Time.time), Mathf.Sin(Time.time), 0);
+		float angle = Time.time * speed;
+		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}
 
 	void OnMouseDown() {
