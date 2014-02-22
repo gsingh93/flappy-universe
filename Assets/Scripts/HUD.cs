@@ -12,8 +12,22 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 	}
 
+	public void Update() {
+		if (Input.GetKey(KeyCode.Z)) {
+			startPosition = transform.position;
+			if (startPosition.z > -100) {
+				Camera.main.transform.position += Vector3.back;
+			}
+		} else if (Input.GetKey(KeyCode.X)) {
+			startPosition = transform.position;
+			if (startPosition.z < -15) {
+				Camera.main.transform.position += Vector3.forward;
+			}
+		}
+	}
+
 	private void LateUpdate() {
-		if (selectedObject != null) {
+		if (selectedObject != null) {			
 			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
 		} else {
 			targetPosition = startPosition;
