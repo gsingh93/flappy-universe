@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
+  player: {fileID: 0}
   u: .5
   speed: .699999988
 --- !u!114 &1197561123
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnNumber: 0
+  resources: 100
   planets: []
 --- !u!114 &1197561124
 MonoBehaviour:

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 	public SelectableObject selectedObject;
+	public Player player;
 	public float u = 0.5f;
 
 	public float speed = 0.25f;
@@ -12,6 +13,7 @@ public class HUD : MonoBehaviour {
 
 	private void Start() {
 		startPosition = transform.position;
+		player = GetComponent<Player> ();
 	}
 
 	public void Update() {
@@ -66,5 +68,11 @@ public class HUD : MonoBehaviour {
 				selectedObject = null;
 			}
 		}
+
+		if (GUI.Button(new Rect(Screen.width-110, Screen.height-30, 100, 20), "End Turn")) {
+			player.turnFinish();
+		}
+
+		GUI.Label (new Rect (10, Screen.height - 30, 100, 30), ("Energy: " + player.resources) );
 	}
 }

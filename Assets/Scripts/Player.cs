@@ -5,13 +5,12 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	
 	public int turnNumber = 0;
-	public Hashtable resources;
+	public int resources = 100;
 	public List<Planet> planets;
 
 	// Use this for initialization
 	private void Start () {
-		resources = new Hashtable ();
-		resources.Add ("Energy", 100);
+
 	}
 	
 	// Update is called once per frame
@@ -22,7 +21,9 @@ public class Player : MonoBehaviour {
 	public void turnFinish () {
 		turnNumber++;
 
-
+		foreach (Planet p in planets) {
+			resources += p.harvestEnergy();
+		}
 	}
 
 	public void turnStart() {
