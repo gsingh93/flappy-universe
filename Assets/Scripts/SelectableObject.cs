@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class SelectableObject : MonoBehaviour {
 	public HUD hud;
 
-	private void Start() {
+	protected void Start() {
 		hud = Camera.main.GetComponent<HUD> ();
 	}
 
