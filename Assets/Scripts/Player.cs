@@ -8,9 +8,15 @@ public class Player : MonoBehaviour {
 	public int resources = 100;
 	public List<Planet> planets;
 
+	public List<Celestial> celestialBodies;
+
 	public void claimPlanet(Planet planet) {
 		planets.Add (planet);
 		planet.claimed = true;
+	}
+
+	public void addCelestialBody(Celestial celest) {
+		celestialBodies.Add (celest);
 	}
 
 	public void turnFinish () {
@@ -19,9 +25,24 @@ public class Player : MonoBehaviour {
 		foreach (Planet p in planets) {
 			resources += p.harvestEnergy();
 		}
+
+		
+		for (int i=0; i<celestialBodies.Count; i++) {
+			Celestial c = celestialBodies[i];
+
+			c.turnsLeft--;
+			if (c.turnsLeft <= 0) {
+				celestialBodies.Remove(c);
+				c.nextState();
+				i--;
+			}
+
+		}
 	}
 
 	public void turnStart() {
 
 	}
+
+
 }

@@ -44,8 +44,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: .830424309, y: -2.29387379, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: b2f4064fd135bcc40a6975a92dcf86d1, type: 2}
+  - {fileID: 2100000, guid: 5106f213d6d224f47b23c40fe6a0fa96, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -143,9 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a8c38e8cd574cdfa277f5cad4dee60, type: 3}
+  m_Script: {fileID: 11500000, guid: acd2e54a5e3f24c37a5c413a2c7ef722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hud: {fileID: 0}
   stateType: 
   turnsLeft: 5
   starLabelStyle:
@@ -279,8 +280,8 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4285397758
-  m_Size: 1.11000001
+    rgba: 4278202104
+  m_Size: 4
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
