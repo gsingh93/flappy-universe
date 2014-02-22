@@ -4,7 +4,10 @@ using System.Collections;
 public class StellarNebula : Celestial {
 
 	private void Start () {
+		base.Start ();
+		
 		stateType = "Stellar Nebula";
+		nextStarState = "Planetary Nebula";
 	}
 
 	override public void nextState() {

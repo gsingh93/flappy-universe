@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Celestial : MonoBehaviour {
+public abstract class Celestial : SelectableObject {
 
 	public string stateType;
 	public int turnsLeft = 5;
@@ -18,9 +18,13 @@ public abstract class Celestial : MonoBehaviour {
 
 	abstract public void nextState ();
 
-	private void Start () {
+	protected void Start () {
+		base.Start ();
+
 		turnsLeft = Random.Range (5, 15);
 		bodyMass = Random.Range (1, 2000);
+
+		Camera.main.GetComponent<Player> ().addCelestialBody(this);
 
 //		smlStarStates = new string[] {"Stellar Nebula ", "Brown Dwarf"};
 //		avgStarStates = new string[] {"Stellar Nebula ", "Yellow Star ", "Red Giant ", "Planetary Nebula ", "White Dwarf "};
@@ -29,7 +33,7 @@ public abstract class Celestial : MonoBehaviour {
 	}
 
 	private void Update () {
-	
+
 	}
 
 //	private void OnGUI () {
@@ -41,8 +45,27 @@ public abstract class Celestial : MonoBehaviour {
 //	}
 
 
-	private void setCurState (int numStates) {
-		if (curState < numStates)
-			curState++;
+	#region implemented abstract members of SelectableObject
+
+	public override string getName ()
+	{
+		return stateType;
 	}
+
+	public override string getDescription ()
+	{
+		return turnsLeft + " Turns to " + nextStarState;
+	}
+
+	public override MenuOption[] getOptions ()
+	{
+		return new MenuOption[0];
+	}
+
+	public override void OnOptionSelected (MenuOption option)
+	{
+		return;
+	}
+
+	#endregion
 }
