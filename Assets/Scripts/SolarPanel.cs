@@ -3,8 +3,17 @@ using System.Collections;
 
 public class SolarPanel : Resource {
 
+	private Revolve r;
+
 	public override int harvestResources(Planet p, bool dryRun) {
-		float distance = Vector3.Distance(p.transform.position, p.transform.parent.transform.position);
-		return (int) (100 / distance);
+		if (r == null) {
+			r = p.GetComponent<Revolve>();
+		}
+		float radius = r.radius;
+		return (int) (100 / radius);
+	}
+
+	public override string getName() {
+		return "Solar Panel";
 	}
 }

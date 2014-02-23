@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class Planet : SelectableObject {
 	public string planetName;
@@ -29,6 +30,7 @@ public class Planet : SelectableObject {
 	public int totalSlots = 4;
 
 	private List<Resource> resources = new List<Resource>();
+	private List<Resource> dummyResources = new List<Resource>();
 
 	private static string OPTION_BUILD_MINE = "Build Mine";
 	private static string OPTION_BUILD_SOLAR_PANEL = "Build Solar Panel";
@@ -40,7 +42,7 @@ public class Planet : SelectableObject {
 	};
 
 	new private void Start() {
-		base.Start ();
+		base.Start();
 		if (gameObject.name == "Earth")
 			renderer.material.mainTexture = textures[4];
 		else {
@@ -52,6 +54,14 @@ public class Planet : SelectableObject {
 
 			renderer.material.mainTexture = textures[rndRngVal];
 		}
+
+		Mine m = Instantiate(minePrefab) as Mine;
+		m.renderer.enabled = false;
+		dummyResources.Add(m);
+
+		SolarPanel s = Instantiate(solarPanelPrefab) as SolarPanel;
+		s.renderer.enabled = false;
+		dummyResources.Add(s);
 	}
 	
 	private int calculateEnergy(bool dryRun) {
@@ -72,13 +82,23 @@ public class Planet : SelectableObject {
 	}
 
 	public override string getDescription() {
+		StringBuilder sb = new StringBuilder();
 		if (claimed) {
-			return (totalSlots - resources.Count) + " empty building slots.\n" +
-				"+" + calculateEnergy(true) + " energy per turn.\n" +
-				totalResources + " minerals remaining in planet";
+			sb.Append(totalSlots - resources.Count)
+				.Append(" empty building slots.\n")
+					.Append(calculateEnergy(true))
+					.Append(" energy per turn.\n")
+					.Append(totalResources)
+					.Append(" minerals remaining in planet\n");
 		} else {
-			return "You haven't claimed this planet.";
+			sb.Append("You haven't claimed this planet.\n");
 		}
+
+		foreach (Resource r in dummyResources) {
+			sb.Append(r.getName() + ": " + r.harvestResources(this, true) + " Energy\n");
+		}
+
+		return sb.ToString();
 	}
 
 	public override MenuOption[] getOptions() {

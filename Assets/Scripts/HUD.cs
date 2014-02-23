@@ -6,7 +6,9 @@ public class HUD : MonoBehaviour {
 	private const int buttonWidth = 150;
 	private const int maxZoom = -15;
 	private const int minZoom = -100;
-
+	private const int HUDHeight = 150;
+	private const int HUDWidth = 200;
+	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
 	{
@@ -77,7 +79,8 @@ public class HUD : MonoBehaviour {
 	private void OnGUI () {
 		GUI.skin.button.wordWrap = true;
 		if (selectedObject != null) {
-			GUI.Box(new Rect (0, 0, 200, 150), selectedObject.getName() + "\n" + selectedObject.getDescription());
+			GUI.Box(new Rect(0, 0, HUDWidth, HUDHeight),
+			        selectedObject.getName() + "\n" + selectedObject.getDescription());
 
 			MenuOption[] options = selectedObject.getOptions();
 			for (int i = 0; i < options.Length; i++) {
@@ -86,8 +89,7 @@ public class HUD : MonoBehaviour {
 					GUI.enabled = false;
 				}
 				float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
-				Debug.Log (height);
-				if (GUI.Button(new Rect (20, 50 + 40 * (i + 1), buttonWidth, height), buttonText)) {
+				if (GUI.Button(new Rect (20, 70 + 40 * (i + 1), buttonWidth, height), buttonText)) {
 					selectedObject.OnOptionSelected(options[i]);
 				}
 				GUI.enabled = true;

@@ -10,4 +10,9 @@ public class Mine : Resource {
 		}
 		return resources;
 	}
+
+	
+	public override string getName() {
+		return "Mine";
+	}
 }
