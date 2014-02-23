@@ -3,7 +3,7 @@
 --- !u!29 &1
 SceneSettings:
   m_ObjectHideFlags: 0
-  m_PVSData:
+  m_PVSData: 
   m_PVSObjectsArray: []
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
@@ -111,8 +111,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 488586b0d84c8b943842b74bbff08248, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   planetPrefab: {fileID: 11400004, guid: f9bfef15dff8cac4ca71d147c8ad7216, type: 2}
   ourSolarSystem: 1
   celestialPrefabs:
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 488586b0d84c8b943842b74bbff08248, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   planetPrefab: {fileID: 11400004, guid: f9bfef15dff8cac4ca71d147c8ad7216, type: 2}
   ourSolarSystem: 0
   celestialPrefabs:
@@ -300,10 +300,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7cf591c7273d45abb75c8255ee4246f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   style:
-    m_Name:
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -374,8 +374,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a68f2a67b850b4ad79b64cb00a4b399d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   turnNumber: 0
   resources: 50
   planets: []
@@ -388,9 +388,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1197561116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e61f80cee606704c9898f59e23802a3, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Script: {fileID: 11500000, guid: 187d1e8f0b6b2f84ab457367339c47c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0
