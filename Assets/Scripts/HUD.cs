@@ -37,6 +37,9 @@ public class HUD : MonoBehaviour {
 
 	private Vector3 startPosition;
 	private Vector3 targetPosition;
+	
+	protected Vector3 point;
+	protected GameObject gobject;
 
 	public void PickPlanet(Ship ship) {
 		shipToPickDestinationFor = ship;
@@ -47,6 +50,7 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 		player = GetComponent<Player>();
 		style.fontSize = 31;
+		point = new Vector3 ();
 	}
 
 	public void Update() {
@@ -71,6 +75,20 @@ public class HUD : MonoBehaviour {
 				startPosition = transform.position;
 			}
 		}
+		
+//		if (Input.GetMouseButtonDown(0)) {
+//			Debug.Log("1");
+//			RaycastHit hit;
+//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//			
+//			if (Physics.Raycast(ray, out hit, Mathf.Infinity)){
+//				Debug.Log("2");
+//				point = hit.point;
+//				//				gobject = hit.transform.gameObject;
+//				selectedObject = hit.transform.gameObject.GetComponent<SelectableObject>();
+//				Debug.Log(hit.transform.gameObject.name);
+//			}
+//		}
 	}
 
 	private void LateUpdate() {
