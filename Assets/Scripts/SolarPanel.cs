@@ -15,7 +15,7 @@ public class SolarPanel : Resource {
 			r = p.GetComponent<Revolve>();
 		}
 		float radius = r.radius;
-		return (int) (solarSystem.getSolarOutput() / radius);
+		return (int) (solarSystem.getSolarOutput() * 0.6f / radius);
 	}
 
 	public override string getName() {

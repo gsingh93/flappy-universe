@@ -46,7 +46,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -271,9 +271,12 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  curState: 1
   nextStarState: 
   lblShowing: 1
+  permState: 0
+  shouldGeneratePlanets: 1
+  starLabelOffset: 0
+  solarOutput: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
