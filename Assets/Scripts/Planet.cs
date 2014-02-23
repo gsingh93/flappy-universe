@@ -59,10 +59,14 @@ public class Planet : SelectableObject {
 
 		Mine m = Instantiate(minePrefab) as Mine;
 		m.renderer.enabled = false;
+		m.transform.parent = transform;
+		m.name = "DummyMine";
 		dummyResources.Add(m);
 
 		SolarPanel s = Instantiate(solarPanelPrefab) as SolarPanel;
 		s.renderer.enabled = false;
+		s.transform.parent = transform;
+		s.name = "DummySolarPanel";
 		dummyResources.Add(s);
 	}
 	
