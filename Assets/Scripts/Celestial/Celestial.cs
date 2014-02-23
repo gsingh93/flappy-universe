@@ -57,7 +57,6 @@ public abstract class Celestial : SelectableObject {
 	}
 
 	protected void OnCollisionStay (Collision col) {
-		print(col.gameObject.name);
 		if (col.gameObject.tag != "Celestial")
 			Destroy(col.gameObject);
 	}

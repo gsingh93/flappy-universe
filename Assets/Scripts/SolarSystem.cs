@@ -16,13 +16,7 @@ public class SolarSystem : MonoBehaviour {
 
 	private int numPlanets;
 
-	private void Awake() {
-		Debug.Log ("awake");
-	}
-
 	private void Start() {
-		Debug.Log ("here2");
-		
 		if (ourSolarSystem) {
 			GenerateOurSolarSystem();
 		} else {
@@ -74,7 +68,7 @@ public class SolarSystem : MonoBehaviour {
 		}
 	}
 
-//	private void OnCollisionEnter(Collision other) {
-//		//transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim));
-//	}
+	private void OnCollisionEnter(Collision other) {
+		transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim));
+	}
 }
