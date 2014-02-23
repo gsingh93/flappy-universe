@@ -9,6 +9,10 @@ public class HUD : MonoBehaviour {
 	private const int HUDHeight = 150;
 	private const int HUDWidth = 200;
 	public const int Dim = 200;
+
+	private float date = 1.0f;
+
+	private float turnTime = 0.5f;
 	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
@@ -75,20 +79,6 @@ public class HUD : MonoBehaviour {
 				startPosition = transform.position;
 			}
 		}
-		
-//		if (Input.GetMouseButtonDown(0)) {
-//			Debug.Log("1");
-//			RaycastHit hit;
-//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//			
-//			if (Physics.Raycast(ray, out hit, Mathf.Infinity)){
-//				Debug.Log("2");
-//				point = hit.point;
-//				//				gobject = hit.transform.gameObject;
-//				selectedObject = hit.transform.gameObject.GetComponent<SelectableObject>();
-//				Debug.Log(hit.transform.gameObject.name);
-//			}
-//		}
 	}
 
 	private void LateUpdate() {
@@ -130,6 +120,7 @@ public class HUD : MonoBehaviour {
 
 		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
+			date += turnTime;
 		}
 
 		energyLabelStyle.fontSize = 20;
@@ -140,5 +131,9 @@ public class HUD : MonoBehaviour {
 		text = "Planets: " + player.planets.Count;
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight*2 - 10, 100, 30), text, energyLabelStyle);
+
+		text = "Date: " + date + " AD";
+		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
+		GUI.Label(new Rect(Screen.width - 150, 10, textHeight, 30), text, energyLabelStyle);
 	}
 }
