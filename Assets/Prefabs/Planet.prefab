@@ -110,7 +110,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 93adfd1fbe1cd734ba0bf0b63de64d91, type: 3}
   - {fileID: 2800000, guid: fe17510e69dff6a4da00382fd9e09f12, type: 3}
   - {fileID: 2800000, guid: a8b5e4aa44a00ca43a473c923864d448, type: 3}
-  totalResources: 200
+  totalResources: 500
   totalSlots: 4
 --- !u!120 &12000000
 LineRenderer:
