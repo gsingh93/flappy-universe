@@ -6,7 +6,6 @@ public class GenerateUniverse : MonoBehaviour {
 
 	public int numSystems = 2;
 	public SolarSystem solarSystemPrefab;
-	public List<GameObject> sSystems;
 
 	void Start() {
 		SolarSystem s = Instantiate(solarSystemPrefab) as SolarSystem;

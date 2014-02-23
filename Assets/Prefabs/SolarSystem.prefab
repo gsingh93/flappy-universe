@@ -42,8 +42,8 @@ MonoBehaviour:
   planetPrefab: {fileID: 11400004, guid: f9bfef15dff8cac4ca71d147c8ad7216, type: 2}
   ourSolarSystem: 0
   celestialPrefabs:
-  - {fileID: 11400002, guid: 199dfb69757681349a4696c7cb951d0d, type: 2}
   - {fileID: 11400000, guid: cad5cf90b40b647cd97f3f804f51c07f, type: 2}
+  - {fileID: 11400002, guid: 199dfb69757681349a4696c7cb951d0d, type: 2}
   - {fileID: 11400000, guid: 840f19b86fb11483e8300509d0fe0c6c, type: 2}
   celestial: {fileID: 0}
   planets: []

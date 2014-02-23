@@ -12,6 +12,8 @@ public class BlackHole : Celestial {
 		stateType = "Black Hole";
 		starLabelOffset = 2.33f;
 
+		planets = new List<Planet> ();
+
 		foreach (Planet p in transform.parent.GetComponentsInChildren<Planet> ()) {
 			planets.Add(p);
 		}
@@ -24,7 +26,13 @@ public class BlackHole : Celestial {
 				planets.Remove(planets[i]);
 				i--;
 			} else {
-				planets[i].gameObject.transform.position += new Vector3 (0f, 0f, 0f);
+				float rad = planets[i].GetComponent<Revolve> ().radius;
+				if (rad > 0f)
+					planets[i].GetComponent<Revolve> ().radius -= Time.deltaTime;
+				else {
+					planets.Remove(planets[i]);
+					i--;
+				}
 			}
 		}
 	}
