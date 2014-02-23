@@ -107,6 +107,23 @@ public class Planet : SelectableObject {
 		return sb.ToString();
 	}
 
+	protected override void OnMouseDown() {
+		base.OnMouseDown ();
+		if (hud.shipToPickDestinationFor != null) {
+			Ship ship = hud.shipToPickDestinationFor;
+			float distance = 0f;
+			if (ship.transform.parent.parent == transform.parent) {
+				// Intra-stellar travel
+				distance = Mathf.Abs(GetComponent<Revolve>().radius - ship.transform.parent.GetComponent<Revolve>().radius);
+			} else {
+				// Inter-stellar travel
+				distance = Vector3.Distance(ship.transform.parent.parent.position, transform.parent.position) - GetComponent<Revolve>().radius;
+			}
+
+			FLY_TO_PLANET_OPTION.cost = (int) (distance * 5);
+		}
+	}
+
 	public override MenuOption[] getOptions() {
 		if (claimed) {
 			return options;

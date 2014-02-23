@@ -11,7 +11,7 @@ public abstract class SelectableObject : MonoBehaviour {
 		player = Camera.main.GetComponent<Player> ();
 	}
 
-	private void OnMouseDown() {
+	protected virtual void OnMouseDown() {
 		hud.selectedObject = this;
 	}
 
