@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 122: {fileID: 12200000}
   - 114: {fileID: 11400002}
+  - 120: {fileID: 12000000}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -111,6 +112,40 @@ MonoBehaviour:
   - {fileID: 2800000, guid: a8b5e4aa44a00ca43a473c923864d448, type: 3}
   totalResources: 200
   totalSlots: 4
+--- !u!120 &12000000
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 98ab6ec886230d34b87cfbe47a67ea67, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .100000001
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1

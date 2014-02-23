@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour {
 	private const int minZoom = -100;
 	private const int HUDHeight = 150;
 	private const int HUDWidth = 200;
+	public const int Dim = 200;
 	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
@@ -39,7 +40,7 @@ public class HUD : MonoBehaviour {
 		shipToPickDestinationFor = ship;
 		selectedObject = null;
 	}
-
+	
 	private void Start() {
 		startPosition = transform.position;
 		player = GetComponent<Player>();
@@ -48,26 +49,22 @@ public class HUD : MonoBehaviour {
 
 	public void Update() {
 		if (selectedObject == null) {
-			if (Input.GetKey(KeyCode.Z)) {
-				if (startPosition.z < maxZoom) {
-					Camera.main.transform.position += Vector3.forward;
-				}
+			if (startPosition.z < maxZoom && Input.GetKey(KeyCode.Z)) {
+				Camera.main.transform.position += Vector3.forward;
 				startPosition = transform.position;
-			} else if (Input.GetKey(KeyCode.X)) {
-				if (startPosition.z > minZoom) {
-					Camera.main.transform.position += Vector3.back;
-				}
+			} else if (startPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
+				Camera.main.transform.position += Vector3.back;
 				startPosition = transform.position;
-			} else if (Input.GetAxis("Horizontal") > 0) {
+			} else if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
 				Camera.main.transform.position += speed * Vector3.right;
 				startPosition = transform.position;
-			} else if (Input.GetAxis("Horizontal") < 0) {
+			} else if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
 				Camera.main.transform.position += speed * Vector3.left;
 				startPosition = transform.position;
-			} else if (Input.GetAxis("Vertical") > 0) {
+			} else if (startPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
 				Camera.main.transform.position += speed * Vector3.up;
 				startPosition = transform.position;
-			} else if (Input.GetAxis("Vertical") < 0) {
+			} else if (startPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
 				Camera.main.transform.position += speed * Vector3.down;
 				startPosition = transform.position;
 			}

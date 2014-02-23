@@ -68,6 +68,24 @@ public class Planet : SelectableObject {
 		s.transform.parent = transform;
 		s.name = "DummySolarPanel";
 		dummyResources.Add(s);
+
+		CreateRing();
+	}
+
+	private void CreateRing() {
+		LineRenderer line = GetComponent<LineRenderer>();
+		float angle = 0;
+		int segments = 200;
+		line.SetVertexCount(segments);
+
+		for (int i = 0; i < segments; i++) {
+			float x = Mathf.Sin(Mathf.Deg2Rad * angle) * GetComponent<Revolve>().radius;
+			float y = Mathf.Cos(Mathf.Deg2Rad * angle) * GetComponent<Revolve>().radius;
+			
+			line.SetPosition(i, new Vector3(x, y, 0));
+
+			angle += 360f / segments;
+		}
 	}
 	
 	private int calculateEnergy(bool dryRun) {
