@@ -8,8 +8,8 @@ public class WhiteDwarf : Celestial {
 		
 		stateType = "White Dwarf";
 		starLabelOffset = 2.33f;
-		
-		Mathf.Clamp (prob, 0.01f, 1f);
+
+		solarOutput = 50;
 	}
 	
 	

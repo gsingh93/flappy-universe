@@ -9,9 +9,7 @@ public class MassiveStar : Celestial {
 		stateType = "Massive Star";
 		nextStarState = "Red Supergiant";
 		starLabelOffset = 0.57f;
-		
-		Mathf.Clamp (prob, 1f, 2f);
+
+		solarOutput = 150;
 	}
-	
-	
 }

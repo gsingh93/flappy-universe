@@ -8,8 +8,8 @@ public class StellarNebula : Celestial {
 		
 		stateType = "Stellar Nebula";
 		nextStarState = "Star";
-		
-		Mathf.Clamp (prob, 0.5f, 2f);
+
+		solarOutput = 0;
 	}
 	
 	override public void nextState() {

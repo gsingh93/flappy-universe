@@ -25,6 +25,8 @@ public class HUD : MonoBehaviour {
 	}
 
 	public GUIStyle style = new GUIStyle();
+	public GUIStyle energyLabelStyle = new GUIStyle ();
+	public float energyLabelStyleFontSize = 60f;
 
 	public Ship shipToPickDestinationFor;
 
@@ -90,7 +92,7 @@ public class HUD : MonoBehaviour {
 			for (int i = 0; i < options.Length; i++) {
 				string buttonText = options[i].name;
 				if (options[i].cost > 0) {
-                	buttonText += " (" + options[i].cost + " energy)";
+                	buttonText += " (costs " + options[i].cost + " energy)";
                	}
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
@@ -107,10 +109,11 @@ public class HUD : MonoBehaviour {
 			}
 		}
 
-		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "End Turn")) {
+		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
 		}
 
-		GUI.Label(new Rect(10, Screen.height - 30, 100, 30), ("Energy: " + player.resources));
+		energyLabelStyle.fontSize = (int) (Screen.width / energyLabelStyleFontSize);
+		GUI.Label(new Rect(10, Screen.height * 0.9f, 100, 30), ("Energy: " + player.resources), energyLabelStyle);
 	}
 }
