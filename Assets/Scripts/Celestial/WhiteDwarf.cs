@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Star : Celestial {
-
+public class WhiteDwarf : Celestial {
+	
 	new private void Start () {
 		base.Start ();
-
-		stateType = "Yellow Star";
-		nextStarState = "Red Giant";
+		
+		stateType = "White Dwarf";
 		starLabelOffset = 2.33f;
 	}
-
-
+	
+	
 }

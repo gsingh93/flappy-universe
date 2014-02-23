@@ -13,10 +13,10 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
   - 122: {fileID: 12200000}
-  - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: RedGiant
+  m_Name: WhiteDwarf
   m_TagString: Celestial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 5106f213d6d224f47b23c40fe6a0fa96, type: 2}
+  - {fileID: 2100000, guid: 3fc09b937ec02452b96a472313396654, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -147,11 +147,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd2e54a5e3f24c37a5c413a2c7ef722, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f96212635f3a4d4ba6f4b0d18be953a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
-  stateType: RedGiant
+  stateType: White Dwarf
   turnsLeft: 5
   starLabelStyle:
     m_Name: 
@@ -200,7 +200,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 0
     m_FontStyle: 0
     m_Alignment: 1
     m_WordWrap: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   starTypeStyle:
-    m_Name: Star
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
       m_TextColor: {r: 1, g: 1, b: 1, a: 1}
@@ -259,7 +259,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 0
     m_FontStyle: 1
     m_Alignment: 1
     m_WordWrap: 0
@@ -271,9 +271,10 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  curState: 1
   nextStarState: 
   lblShowing: 1
+  permState: 1
+  starLabelOffset: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,8 +296,8 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4278213375
-  m_Size: 4
+    rgba: 3587231952
+  m_Size: 1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

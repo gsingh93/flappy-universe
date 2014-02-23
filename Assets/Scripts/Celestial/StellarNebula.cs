@@ -7,19 +7,19 @@ public class StellarNebula : Celestial {
 		base.Start ();
 		
 		stateType = "Stellar Nebula";
-		nextStarState = "Planetary Nebula";
+		nextStarState = "Star";
 	}
-
+	
 	override public void nextState() {
-		if (prob < 50) {
-
-		} else if (prob < 1500) {
-
-		} else if (prob < 1900) {
-
+//		Debug.Log ("prob " + prob);
+		if (prob < 1500) {
+			nextStarState = "Star";
 		} else {
-
+			nextStarState = "Red Supergiant";
 		}
+		
+		base.nextState ();
 	}
-
 }
+
+

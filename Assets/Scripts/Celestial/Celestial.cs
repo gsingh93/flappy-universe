@@ -7,31 +7,29 @@ public abstract class Celestial : SelectableObject {
 	public int turnsLeft = 5;
 	public GUIStyle starLabelStyle;
 	public GUIStyle starTypeStyle;
-	public int curState = 1;
 	public string nextStarState;
 	public bool lblShowing = true;
+	public bool permState = false;
 
 	protected int prob = 50;
-	protected float starLabelOffset;
+	public float starLabelOffset = 0f;
 	protected float transitionTime = 0.5f;
 	protected int bodyMass;
+	protected GameObject nextCelestial;
+	protected float finalScale;
 
-	private int lblWidth = 80;
-	private int lblHeight = 100;
+	private int lblWidth = 1;
+	private int lblHeight = 1;
 
-	abstract public void nextState ();
 
 	new protected void Start () {
 		base.Start ();
 
 		turnsLeft = Random.Range (5, 15);
+		prob = Random.Range (1, 2000);
 
 		Camera.main.GetComponent<Player> ().addCelestialBody(this);
 
-//		smlStarStates = new string[] {"Stellar Nebula ", "Brown Dwarf"};
-//		avgStarStates = new string[] {"Stellar Nebula ", "Yellow Star ", "Red Giant ", "Planetary Nebula ", "White Dwarf "};
-//		msvStarStates = new string[] {"Stellar Nebula ", "Massive Star ", "Red SuperGiant ", "Planetary Nebula ", "White Dwarf "};
-//		gntStarStates = new string[] {"Stellar Nebula ", "Supermassive Star ", "Red SuperGiant ", "Planetary Nebula ", "White Dwarf "};
 	}
 
 	protected void Update () {
@@ -39,15 +37,22 @@ public abstract class Celestial : SelectableObject {
 	}
 
 	protected void OnGUI () {
-		Vector3 offset = new Vector3 (-transform.lossyScale.x * starLabelOffset, transform.lossyScale.y * Screen.height/30f, 0);
-		var p = Camera.main.WorldToScreenPoint(transform.position);
-		p += offset;
 
 		if (lblShowing) {
-			starLabelStyle.fontSize = Screen.width / 60;
-			starTypeStyle.fontSize = Screen.width / 50;
-			GUI.Box (new Rect(p.x,p.y,lblWidth,lblHeight), stateType, starTypeStyle);
-			GUI.Label(new Rect(p.x,p.y+Screen.height/20,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
+			float distToCam = (transform.position.z - Camera.main.transform.position.z);
+
+			Vector3 offset = new Vector3 (-transform.lossyScale.x * starLabelOffset, transform.lossyScale.y, 0);
+			var p = Camera.main.WorldToScreenPoint(transform.position);
+			p += offset;
+
+//			starLabelStyle.fontSize = (int) (200f/distToCam*Screen.width/600f);
+//			starTypeStyle.fontSize = (int) (250f/distToCam*Screen.width/550f);
+			starLabelStyle.fontSize = (int) (Screen.width/60f);
+			starTypeStyle.fontSize = (int) (Screen.width/50f);
+
+			GUI.Box (new Rect(p.x,Screen.height-p.y+(200f/distToCam*Screen.height/125f)+transform.localScale.x/0.25f,lblWidth,lblHeight), stateType, starTypeStyle);
+			if (!permState)
+				GUI.Label(new Rect(p.x,Screen.height-p.y+(200f/distToCam*Screen.height/125f)+transform.localScale.x/0.25f+Screen.height/20f,lblWidth,lblHeight), (turnsLeft) + " Turns to " + nextStarState, starLabelStyle);
 		}
 	}
 
@@ -62,6 +67,48 @@ public abstract class Celestial : SelectableObject {
 		if (col.gameObject.tag != "Celestial")
 			Destroy(col.gameObject);
 	}
+	
+	virtual public void nextState () {
+		
+		rigidbody.isKinematic = true;
+		collider.isTrigger = true;
+		renderer.enabled = false;
+		(gameObject.GetComponent ("Halo") as Behaviour).enabled = false;
+		lblShowing = false;
+		
+		nextCelestial = (GameObject)Instantiate(Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
+		finalScale = nextCelestial.transform.localScale.x;
+		nextCelestial.transform.parent = transform.parent;
+		
+		nextCelestial.GetComponent<Celestial> ().lblShowing = false;
+		nextCelestial.transform.localScale = transform.localScale;
+
+		StartCoroutine ("growStar");
+	}
+	
+	virtual protected IEnumerator growStar () {
+		float growTimer = 0f;
+		float changeVel;
+		Vector3 changeVect = new Vector3 ();
+
+		if (finalScale > transform.localScale.x) {
+			changeVel = (finalScale - transform.localScale.x) / transitionTime;
+		} else {
+			changeVel = (transform.localScale.x - finalScale) / transitionTime;
+		}
+		
+		while (growTimer < transitionTime) {
+			growTimer += Time.deltaTime;
+			
+			changeVect.x = changeVect.y = changeVect.z = Mathf.Clamp01(changeVel*growTimer)*(finalScale - transform.localScale.x)+transform.localScale.x;
+			nextCelestial.transform.localScale = changeVect;
+			
+			yield return null;
+		}
+		
+		nextCelestial.GetComponent<Celestial> ().lblShowing = true;
+		Destroy (gameObject);  
+	}
 
 	#region implemented abstract members of SelectableObject
 
@@ -72,7 +119,10 @@ public abstract class Celestial : SelectableObject {
 
 	public override string getDescription ()
 	{
-		return turnsLeft + " Turns to " + nextStarState;
+		if (!permState)
+			return turnsLeft + " Turns to " + nextStarState;
+
+		return "";
 	}
 
 	public override MenuOption[] getOptions ()

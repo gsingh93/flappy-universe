@@ -8,16 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 33: {fileID: 3300000}
-  - 135: {fileID: 13500000}
-  - 23: {fileID: 2300000}
-  - 114: {fileID: 11400002}
-  - 122: {fileID: 12200000}
-  - 114: {fileID: 11400000}
-  - 54: {fileID: 5400000}
+  - 108: {fileID: 10800000}
   m_Layer: 0
-  m_Name: RedGiant
-  m_TagString: Celestial
+  m_Name: Point light
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,10 +24,16 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 108: {fileID: 10800000}
+  - 33: {fileID: 3300000}
+  - 135: {fileID: 13500000}
+  - 23: {fileID: 2300000}
+  - 114: {fileID: 11400002}
+  - 122: {fileID: 12200000}
+  - 114: {fileID: 11400000}
+  - 54: {fileID: 5400000}
   m_Layer: 0
-  m_Name: Point light
-  m_TagString: Untagged
+  m_Name: StellarNebula
+  m_TagString: Celestial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,10 +46,9 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_Children:
-  - {fileID: 400002}
-  m_Father: {fileID: 0}
+  m_LocalScale: {x: .666666687, y: .666666687, z: .666666687}
+  m_Children: []
+  m_Father: {fileID: 400002}
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -58,22 +57,23 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .666666687, y: .666666687, z: .666666687}
-  m_Children: []
-  m_Father: {fileID: 400000}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children:
+  - {fileID: 400000}
+  m_Father: {fileID: 0}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 5106f213d6d224f47b23c40fe6a0fa96, type: 2}
+  - {fileID: 2100000, guid: ad71004276f8b4640a524516738c4093, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -87,20 +87,20 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
@@ -109,7 +109,7 @@ Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
+  m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 2
@@ -144,14 +144,14 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd2e54a5e3f24c37a5c413a2c7ef722, type: 3}
+  m_Script: {fileID: 11500000, guid: 83a8c38e8cd574cdfa277f5cad4dee60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
-  stateType: RedGiant
+  stateType: Stellar Nebula
   turnsLeft: 5
   starLabelStyle:
     m_Name: 
@@ -213,7 +213,7 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   starTypeStyle:
-    m_Name: Star
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
       m_TextColor: {r: 1, g: 1, b: 1, a: 1}
@@ -271,15 +271,16 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  curState: 1
   nextStarState: 
   lblShowing: 1
+  permState: 0
+  starLabelOffset: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1a3b5c9a8bb7904ba77cbf5c3e08da1, type: 3}
@@ -291,18 +292,18 @@ Halo:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4278213375
-  m_Size: 4
+    rgba: 4294959433
+  m_Size: 15
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -318,6 +319,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 100000}
+  m_RootGameObject: {fileID: 100002}
   m_IsPrefabParent: 1
   m_IsExploded: 1

@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
 			Celestial c = celestialBodies[i];
 
 			c.turnsLeft--;
-			if (c.turnsLeft <= 0) {
+			if (c.turnsLeft <= 0 && !c.permState) {
 				celestialBodies.Remove(c);
 				c.nextState();
 				i--;
