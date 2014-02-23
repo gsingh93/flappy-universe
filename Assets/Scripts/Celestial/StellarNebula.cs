@@ -8,6 +8,7 @@ public class StellarNebula : Celestial {
 		
 		stateType = "Stellar Nebula";
 		nextStarState = "Star";
+		solarOutput = 0;
 	}
 	
 	override public void nextState() {

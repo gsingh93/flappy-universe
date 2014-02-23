@@ -15,6 +15,7 @@ public abstract class Celestial : SelectableObject {
 	public float starLabelOffset = 0f;
 	protected float transitionTime = 0.5f;
 	protected int bodyMass;
+	public int solarOutput;
 	protected GameObject nextCelestial;
 	protected float finalScale;
 
@@ -80,6 +81,8 @@ public abstract class Celestial : SelectableObject {
 		
 		nextCelestial.GetComponent<Celestial> ().lblShowing = false;
 		nextCelestial.transform.localScale = transform.localScale;
+
+		transform.parent.GetComponent<SolarSystem> ().celestial = nextCelestial.GetComponent<Celestial>();
 
 		StartCoroutine ("growStar");
 	}

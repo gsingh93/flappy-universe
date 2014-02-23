@@ -11,6 +11,7 @@ public class RedSuperGiant : Celestial {
 //		nextStarState = "Super Nova";
 		nextStarState = "Stellar Nebula";
 		starLabelOffset = 0f;
+		solarOutput = 300;
 	}
 	
 	

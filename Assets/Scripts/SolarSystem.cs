@@ -23,6 +23,10 @@ public class SolarSystem : MonoBehaviour {
 			GenerateRandomSolarSystem();
 		}
 	}
+
+	public float getSolarOutput() {
+		return celestial.solarOutput;
+	}
 	
 	public void GenerateOurSolarSystem() {
 		celestial = Instantiate(celestialPrefabs[0]) as Celestial;

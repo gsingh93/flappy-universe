@@ -8,6 +8,7 @@ public class WhiteDwarf : Celestial {
 		
 		stateType = "White Dwarf";
 		starLabelOffset = 2.33f;
+		solarOutput = 50;
 	}
 	
 	

@@ -9,6 +9,7 @@ public class Star : Celestial {
 		stateType = "Yellow Star";
 		nextStarState = "Red Giant";
 		starLabelOffset = 2.33f;
+		solarOutput = 100;
 	}
 
 

@@ -10,6 +10,7 @@ public class RedGiant : Celestial {
 		stateType = "Red Giant";
 		nextStarState = "White Dwarf";
 		starLabelOffset = 0f;
+		solarOutput = 200;
 	}
 
 	
