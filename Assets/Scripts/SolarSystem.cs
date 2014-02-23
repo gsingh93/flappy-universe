@@ -22,7 +22,6 @@ public class SolarSystem : MonoBehaviour {
 		} else {
 			GenerateRandomSolarSystem();
 		}
-		GetComponent<SphereCollider>().radius = numPlanets * 2 + 1;
 	}
 
 	public float getSolarOutput() {
@@ -71,13 +70,6 @@ public class SolarSystem : MonoBehaviour {
 			revolution.radius = i * 2;
 			
 			planets.Add(planet);
-		}
-	}
-
-	private void OnCollisionEnter(Collision other) {
-		transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), 0);
-		foreach (Planet p in planets) {
-			p.CreateRing();
 		}
 	}
 }

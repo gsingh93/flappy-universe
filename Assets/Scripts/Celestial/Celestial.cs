@@ -33,10 +33,6 @@ public abstract class Celestial : SelectableObject {
 
 	}
 
-	new protected void Update () {
-
-	}
-
 	protected void OnGUI () {
 
 		if (lblShowing) {

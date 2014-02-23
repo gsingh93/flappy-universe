@@ -68,6 +68,8 @@ public class Planet : SelectableObject {
 		s.transform.parent = transform;
 		s.name = "DummySolarPanel";
 		dummyResources.Add(s);
+
+		CreateRing();
 	}
 
 	public void CreateRing() {
