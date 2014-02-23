@@ -114,6 +114,6 @@ public class HUD : MonoBehaviour {
 		}
 
 		energyLabelStyle.fontSize = (int) (Screen.width / energyLabelStyleFontSize);
-		GUI.Label(new Rect(10, Screen.height - 40, 100, 30), ("Energy: " + player.resources), energyLabelStyle);
+		GUI.Label(new Rect(10, Screen.height * 0.9f, 100, 30), ("Energy: " + player.resources), energyLabelStyle);
 	}
 }
