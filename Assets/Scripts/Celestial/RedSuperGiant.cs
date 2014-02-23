@@ -10,6 +10,8 @@ public class RedSuperGiant : Celestial {
 		stateType = "Red Supergiant";
 		nextStarState = "Super Nova";
 		starLabelOffset = 0f;
+		
+		Mathf.Clamp (prob, 1f, 2f);
 	}
 	
 	

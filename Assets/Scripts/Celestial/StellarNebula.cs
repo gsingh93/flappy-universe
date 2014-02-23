@@ -8,11 +8,13 @@ public class StellarNebula : Celestial {
 		
 		stateType = "Stellar Nebula";
 		nextStarState = "Star";
+		
+		Mathf.Clamp (prob, 0.5f, 2f);
 	}
 	
 	override public void nextState() {
 //		Debug.Log ("prob " + prob);
-		if (prob < 1000) {
+		if (prob < 1f) {
 			nextStarState = "Star";
 		} else {
 			nextStarState = "Massive Star";

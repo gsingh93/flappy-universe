@@ -10,6 +10,8 @@ public class RedGiant : Celestial {
 		stateType = "Red Giant";
 		nextStarState = "White Dwarf";
 		starLabelOffset = 0f;
+		
+		Mathf.Clamp (prob, 0.01f, 1f);
 	}
 
 	

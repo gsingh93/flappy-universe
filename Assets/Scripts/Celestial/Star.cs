@@ -9,6 +9,8 @@ public class Star : Celestial {
 		stateType = "Yellow Star";
 		nextStarState = "Red Giant";
 		starLabelOffset = 2.33f;
+
+		Mathf.Clamp (prob, 0.5f, 1f);
 	}
 
 

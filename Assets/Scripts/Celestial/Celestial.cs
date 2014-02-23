@@ -11,7 +11,7 @@ public abstract class Celestial : SelectableObject {
 	public bool lblShowing = true;
 	public bool permState = false;
 
-	protected int prob = 50;
+	protected float prob = 50;
 	public float starLabelOffset = 0f;
 	protected float transitionTime = 0.5f;
 	protected int bodyMass;
@@ -26,7 +26,7 @@ public abstract class Celestial : SelectableObject {
 		base.Start ();
 
 		turnsLeft = Random.Range (5, 15);
-		prob = Random.Range (1, 2000);
+		prob = Random.Range (0.01f, 2f);
 
 		Camera.main.GetComponent<Player> ().addCelestialBody(this);
 
@@ -77,8 +77,10 @@ public abstract class Celestial : SelectableObject {
 		nextCelestial = (GameObject)Instantiate(Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
 		finalScale = nextCelestial.transform.localScale.x;
 		nextCelestial.transform.parent = transform.parent;
-		
-		nextCelestial.GetComponent<Celestial> ().lblShowing = false;
+
+		Celestial temp = nextCelestial.GetComponent<Celestial> ();
+		temp.lblShowing = false;
+		temp.prob = prob;
 		nextCelestial.transform.localScale = transform.localScale;
 
 		StartCoroutine ("growStar");
@@ -117,10 +119,10 @@ public abstract class Celestial : SelectableObject {
 
 	public override string getDescription ()
 	{
-		if (!permState)
-			return turnsLeft + " Turns to " + nextStarState;
+//		if (!permState)
+//			return turnsLeft + " Turns to " + nextStarState;
 
-		return "";
+		return prob.ToString() + " Solar Masses";
 	}
 
 	public override MenuOption[] getOptions ()

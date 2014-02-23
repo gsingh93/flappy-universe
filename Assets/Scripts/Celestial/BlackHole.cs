@@ -8,6 +8,9 @@ public class BlackHole : Celestial {
 		
 		stateType = "Black Hole";
 		starLabelOffset = 2.33f;
+
+		
+		Mathf.Clamp (prob, 1.9f, 2f);
 	}
 	
 	
