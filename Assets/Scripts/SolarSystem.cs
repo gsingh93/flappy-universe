@@ -5,14 +5,32 @@ public class SolarSystem : MonoBehaviour {
 
 	public Planet planetPrefab;
 	public bool ourSolarSystem = false;
+	public Celestial[] celestialPrefabs;
+
+	public Celestial celestial;
 
 	public const int minPlanets = 6;
 	public const int maxPlanets = 10;
 
 	private int numPlanets;
 	private string[] ourPlanets;
+
+	public void GenerateOurSolarSystem() {
+	}
+
+	public void GenerateRandomSolarSystem() {
+	}
 	
 	private void Start() {
+		if (ourSolarSystem) {
+			GenerateOurSolarSystem();
+		} else {
+			GenerateRandomSolarSystem();
+		}
+		int celestialIndex = (int) (Random.value * celestialPrefabs.Length);
+		celestial = Instantiate (celestialPrefabs[celestialIndex]) as Celestial;
+		celestial.transform.position = transform.position;
+
 		ourPlanets = new string[] {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
 		if (ourSolarSystem) 
 			numPlanets = ourPlanets.Length;
