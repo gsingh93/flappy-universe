@@ -25,6 +25,8 @@ public class HUD : MonoBehaviour {
 
 	public GUIStyle style = new GUIStyle();
 
+	public Ship shipToPickDestinationFor;
+
 	public Player player;
 	public float u = 0.5f;
 
@@ -32,6 +34,11 @@ public class HUD : MonoBehaviour {
 
 	private Vector3 startPosition;
 	private Vector3 targetPosition;
+
+	public void PickPlanet(Ship ship) {
+		shipToPickDestinationFor = ship;
+		selectedObject = null;
+	}
 
 	private void Start() {
 		startPosition = transform.position;
@@ -84,7 +91,10 @@ public class HUD : MonoBehaviour {
 
 			MenuOption[] options = selectedObject.getOptions();
 			for (int i = 0; i < options.Length; i++) {
-				string buttonText = options[i].name + " (" + options[i].cost + " energy)";
+				string buttonText = options[i].name;
+				if (options[i].cost > 0) {
+                	buttonText += " (" + options[i].cost + " energy)";
+               	}
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
 				}

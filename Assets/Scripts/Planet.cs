@@ -15,6 +15,8 @@ public class Planet : SelectableObject {
 	
 	public Texture[] textures;
 
+	private static MenuOption FLY_TO_PLANET_OPTION = new MenuOption("Fly To Planet", 50);
+
 	private bool _claimed;
 	public bool claimed {
 		set {
@@ -104,6 +106,8 @@ public class Planet : SelectableObject {
 	public override MenuOption[] getOptions() {
 		if (claimed) {
 			return options;
+		} else if (hud.shipToPickDestinationFor != null) {
+			return new MenuOption[] {FLY_TO_PLANET_OPTION};
 		} else {
 			return new MenuOption[0];
 		}
@@ -135,6 +139,11 @@ public class Planet : SelectableObject {
 			Ship ship = Instantiate(shipPrefab) as Ship;
 			ship.transform.position = transform.position;
 			ship.transform.parent = this.transform;
+		} else if (option == FLY_TO_PLANET_OPTION) {
+			Ship ship = hud.shipToPickDestinationFor;
+			hud.shipToPickDestinationFor = null;
+			Destroy(ship.gameObject);
+			player.claimPlanet(this);
 		}
 	}
 	#endregion
