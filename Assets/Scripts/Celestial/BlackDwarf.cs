@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NeutronStar : Celestial {
+public class BlackDwarf : Celestial {
+	
 	new private void Start () {
 		base.Start ();
 		
-		stateType = "Neutron Star";
+		stateType = "Black Dwarf";
 		starLabelOffset = 2.33f;
 
-		solarOutput = 10;
+		solarOutput = 0;
 	}
 	
 	

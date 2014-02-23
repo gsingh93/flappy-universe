@@ -18,6 +18,8 @@ public class BlackHole : Celestial {
 			planets.Add(p);
 			p.GetComponent<LineRenderer> ().enabled = false;
 		}
+
+		solarOutput = 0;
 	}
 
 	private void Update () {
