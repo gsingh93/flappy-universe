@@ -120,7 +120,7 @@ public class Planet : SelectableObject {
 		}
 
 		foreach (Resource r in dummyResources) {
-			sb.Append(r.getName() + ": " + r.harvestResources(this, true) + " Energy\n");
+			sb.Append(r.getName() + ": +" + r.harvestResources(this, true) + " Energy/Turn\n");
 		}
 
 		return sb.ToString();

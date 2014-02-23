@@ -90,7 +90,7 @@ public class HUD : MonoBehaviour {
 			for (int i = 0; i < options.Length; i++) {
 				string buttonText = options[i].name;
 				if (options[i].cost > 0) {
-                	buttonText += " (" + options[i].cost + " energy)";
+                	buttonText += " (costs " + options[i].cost + " energy)";
                	}
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
@@ -107,7 +107,7 @@ public class HUD : MonoBehaviour {
 			}
 		}
 
-		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "End Turn")) {
+		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
 		}
 
