@@ -344,6 +344,7 @@ MonoBehaviour:
   turnNumber: 0
   resources: 50
   planets: []
+  solarSystems: []
   celestialBodies: []
 --- !u!1 &1584683032
 GameObject:
