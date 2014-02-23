@@ -16,10 +16,11 @@ public class BlackHole : Celestial {
 
 		foreach (Planet p in transform.parent.GetComponentsInChildren<Planet> ()) {
 			planets.Add(p);
+			p.GetComponent<LineRenderer> ().enabled = false;
 		}
 	}
 
-	new private void Update () {
+	private void Update () {
 
 		for (int i = 0; i < planets.Count; i++) {
 			if (planets[i] == null) {
@@ -28,7 +29,7 @@ public class BlackHole : Celestial {
 			} else {
 				float rad = planets[i].GetComponent<Revolve> ().radius;
 				if (rad > 0f)
-					planets[i].GetComponent<Revolve> ().radius -= Time.deltaTime;
+					planets[i].GetComponent<Revolve> ().radius -= Time.deltaTime*0.5f;
 				else {
 					planets.Remove(planets[i]);
 					i--;

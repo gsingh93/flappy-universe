@@ -5,7 +5,7 @@ public class HUD : MonoBehaviour {
 
 	private const int buttonWidth = 150;
 	private const int maxZoom = -10;
-	private const int minZoom = -100;
+	private const int minZoom = -200;
 	private const int HUDHeight = 150;
 	private const int HUDWidth = 200;
 	public const int Dim = 200;
@@ -37,6 +37,9 @@ public class HUD : MonoBehaviour {
 
 	private Vector3 startPosition;
 	private Vector3 targetPosition;
+	
+	protected Vector3 point;
+	protected GameObject gobject;
 
 	public void PickPlanet(Ship ship) {
 		shipToPickDestinationFor = ship;
@@ -47,6 +50,7 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 		player = GetComponent<Player>();
 		style.fontSize = 31;
+		point = new Vector3 ();
 	}
 
 	public void Update() {
@@ -71,11 +75,26 @@ public class HUD : MonoBehaviour {
 				startPosition = transform.position;
 			}
 		}
+		
+//		if (Input.GetMouseButtonDown(0)) {
+//			Debug.Log("1");
+//			RaycastHit hit;
+//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//			
+//			if (Physics.Raycast(ray, out hit, Mathf.Infinity)){
+//				Debug.Log("2");
+//				point = hit.point;
+//				//				gobject = hit.transform.gameObject;
+//				selectedObject = hit.transform.gameObject.GetComponent<SelectableObject>();
+//				Debug.Log(hit.transform.gameObject.name);
+//			}
+//		}
 	}
 
 	private void LateUpdate() {
 		if (selectedObject != null) {
-			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
+			targetPosition = selectedObject.transform.position +
+				new Vector3(0, 0, -5 - selectedObject.transform.localScale.z);
 		} else {
 			targetPosition = startPosition;
 		}
@@ -113,7 +132,9 @@ public class HUD : MonoBehaviour {
 			player.turnFinish();
 		}
 
-		energyLabelStyle.fontSize = (int) (Screen.width / energyLabelStyleFontSize);
-		GUI.Label(new Rect(10, Screen.height * 0.9f, 100, 30), ("Energy: " + player.resources), energyLabelStyle);
+		energyLabelStyle.fontSize = 20;
+		string text = "Energy: " + player.resources;
+		int textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
+		GUI.Label(new Rect(10, Screen.height - textHeight - 10, 100, 30), text, energyLabelStyle);
 	}
 }
