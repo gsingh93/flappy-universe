@@ -22,10 +22,12 @@ public class SolarSystem : MonoBehaviour {
 		} else {
 			GenerateRandomSolarSystem();
 		}
+		GetComponent<SphereCollider>().radius = numPlanets * 2 + 1;
 	}
 	
 	public void GenerateOurSolarSystem() {
 		celestial = Instantiate(celestialPrefabs[0]) as Celestial;
+		celestial.transform.position = transform.position;
 		celestial.transform.parent = transform;
 		
 		string[] ourPlanets = new string[] {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
@@ -39,7 +41,7 @@ public class SolarSystem : MonoBehaviour {
 			revolution.radius = i * 2;
 			
 			if (i == 3) {
-				Camera.main.GetComponent<Player> ().claimPlanet(planet);
+				Camera.main.GetComponent<Player>().claimPlanet(planet);
 			}
 			
 			planet.planetName = ourPlanets[i-1];
@@ -69,6 +71,9 @@ public class SolarSystem : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim));
+		transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), 0);
+		foreach (Planet p in planets) {
+			p.CreateRing();
+		}
 	}
 }

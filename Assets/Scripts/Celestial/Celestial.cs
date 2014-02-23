@@ -57,12 +57,12 @@ public abstract class Celestial : SelectableObject {
 	}
 
 	protected void OnCollisionStay (Collision col) {
-		if (col.gameObject.tag != "Celestial")
+		if (col.gameObject.tag != "Celestial" && col.gameObject.transform.parent == transform.parent)
 			Destroy(col.gameObject);
 	}
 
 	protected void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag != "Celestial")
+		if (col.gameObject.tag != "Celestial" && col.gameObject.transform.parent == transform.parent)
 			Destroy(col.gameObject);
 	}
 	
