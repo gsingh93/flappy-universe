@@ -61,13 +61,25 @@ public class SolarSystem : MonoBehaviour {
 		celestial.transform.parent = transform;
 		
 		numPlanets = Random.Range(minPlanets, maxPlanets);
-		
+
+		if (celestial.shouldGeneratePlanets) {
+			GenerateRandomPlanets();
+		}
+	}
+
+	public void GenerateRandomPlanets() {
+		float systemEdge = celestial.transform.localScale.x / 2;
 		for (int i = 1; i <= numPlanets; i++) {
 			Planet planet = Instantiate(planetPrefab) as Planet;
 			planet.transform.parent = transform;
 			Revolve revolution = planet.GetComponent<Revolve>();
 			revolution.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
-			revolution.radius = i * 2;
+			
+			float scale = Random.Range(0.5f, 2.5f);
+			float radius = systemEdge + scale / 2 + Random.Range(0.5f, 1.5f);
+			
+			revolution.radius = radius;
+			systemEdge = radius + scale / 2;
 			
 			planets.Add(planet);
 		}

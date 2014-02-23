@@ -10,6 +10,7 @@ public abstract class Celestial : SelectableObject {
 	public string nextStarState;
 	public bool lblShowing = true;
 	public bool permState = false;
+	public bool shouldGeneratePlanets = true;
 
 	protected float prob = 50;
 	public float starLabelOffset = 0f;

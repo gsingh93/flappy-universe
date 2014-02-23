@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class NeutronStar : Celestial {
-	
 	new private void Start () {
 		base.Start ();
 		
