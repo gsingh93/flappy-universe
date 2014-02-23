@@ -17,9 +17,9 @@ public class SuperNova : Celestial {
 		if (prob < 1700) {
 			nextStarState = "Stellar Nebula";
 		} else if (prob < 1900) {
-			nextStarState = "White Dwarf";
+			nextStarState = "Neutron Star";
 		} else {
-			nextStarState = "White Dwarf";
+			nextStarState = "Black Hole";
 		}
 		
 		base.nextState ();

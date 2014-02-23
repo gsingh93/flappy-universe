@@ -12,10 +12,10 @@ public class StellarNebula : Celestial {
 	
 	override public void nextState() {
 //		Debug.Log ("prob " + prob);
-		if (prob < 1500) {
+		if (prob < 1000) {
 			nextStarState = "Star";
 		} else {
-			nextStarState = "Red Supergiant";
+			nextStarState = "Massive Star";
 		}
 		
 		base.nextState ();
