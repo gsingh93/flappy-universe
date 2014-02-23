@@ -141,7 +141,7 @@ public class Planet : SelectableObject {
 				distance = Vector3.Distance(ship.transform.parent.parent.position, transform.parent.position) - GetComponent<Revolve>().radius;
 			}
 
-			FLY_TO_PLANET_OPTION.cost = (int) (distance * 5);
+			FLY_TO_PLANET_OPTION.cost = (int) (distance * 3);
 		}
 	}
 
