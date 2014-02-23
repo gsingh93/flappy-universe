@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 88368544}
   - 114: {fileID: 88368545}
+  - 65: {fileID: 88368546}
   m_Layer: 0
   m_Name: SolarSystem
   m_TagString: Untagged
@@ -119,6 +120,20 @@ MonoBehaviour:
   - {fileID: 11400002, guid: 199dfb69757681349a4696c7cb951d0d, type: 2}
   - {fileID: 11400000, guid: ac9b04c3daecd486cb7fbb6a6fb17d58, type: 2}
   celestial: {fileID: 0}
+  planets: []
+--- !u!65 &88368546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 78909403e23ee41b4a1c1b691eaf5fa7,
+    type: 2}
+  m_PrefabInternal: {fileID: 236998665}
+  m_GameObject: {fileID: 88368543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &236998665
 Prefab:
   m_ObjectHideFlags: 0
@@ -158,6 +173,10 @@ Prefab:
       propertyPath: ourSolarSystem
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
   m_RootGameObject: {fileID: 88368543}
@@ -172,6 +191,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 942544579}
   - 114: {fileID: 942544580}
+  - 65: {fileID: 942544581}
   m_Layer: 0
   m_Name: SolarSystem
   m_TagString: Untagged
@@ -208,6 +228,20 @@ MonoBehaviour:
   - {fileID: 11400002, guid: 199dfb69757681349a4696c7cb951d0d, type: 2}
   - {fileID: 11400000, guid: ac9b04c3daecd486cb7fbb6a6fb17d58, type: 2}
   celestial: {fileID: 0}
+  planets: []
+--- !u!65 &942544581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 78909403e23ee41b4a1c1b691eaf5fa7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1940658410}
+  m_GameObject: {fileID: 942544578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1197561116
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187d1e8f0b6b2f84ab457367339c47c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numSystems: 20
+  solarSystemPrefab: {fileID: 11400000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +523,10 @@ Prefab:
     - target: {fileID: 400000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}

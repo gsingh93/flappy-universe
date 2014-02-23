@@ -8,8 +8,7 @@ public class HUD : MonoBehaviour {
 	private const int minZoom = -100;
 	private const int HUDHeight = 150;
 	private const int HUDWidth = 200;
-	private const int Dim = 200;
-
+	public const int Dim = 200;
 	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
@@ -41,7 +40,7 @@ public class HUD : MonoBehaviour {
 		shipToPickDestinationFor = ship;
 		selectedObject = null;
 	}
-
+	
 	private void Start() {
 		startPosition = transform.position;
 		player = GetComponent<Player>();
