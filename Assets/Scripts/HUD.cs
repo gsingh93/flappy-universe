@@ -93,7 +93,8 @@ public class HUD : MonoBehaviour {
 
 	private void LateUpdate() {
 		if (selectedObject != null) {
-			targetPosition = selectedObject.transform.position + new Vector3(0, 0, -5f);
+			targetPosition = selectedObject.transform.position +
+				new Vector3(0, 0, -5 - selectedObject.transform.localScale.z);
 		} else {
 			targetPosition = startPosition;
 		}
