@@ -8,13 +8,16 @@ public class Revolve : MonoBehaviour {
 	private float angularVelocity;
 	private GameObject parent;
 
+	private float offset;
+
 	private void Start() {
 		parent = transform.parent.gameObject;
 		angularVelocity = speed / radius;
+		offset = Random.value * 6.8f;
 	}
 
 	private void Update() {
-		float angle = Time.time * angularVelocity;
+		float angle = offset + Time.time * angularVelocity;
 		transform.position = parent.transform.position + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 	}
 }
