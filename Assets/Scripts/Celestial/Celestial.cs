@@ -26,14 +26,14 @@ public abstract class Celestial : SelectableObject {
 	new protected void Start () {
 		base.Start ();
 
-		turnsLeft = Random.Range (5, 15);
+		turnsLeft = Random.Range (5, 10);
 		prob = Random.Range (0.01f, 2f);
 
 		Camera.main.GetComponent<Player> ().addCelestialBody(this);
 
 	}
 
-	protected void Update () {
+	new protected void Update () {
 
 	}
 

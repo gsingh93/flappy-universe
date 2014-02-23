@@ -10,15 +10,14 @@ public class SuperNova : Celestial {
 		nextStarState = "?";
 
 		turnsLeft = Random.Range (1, 5);
-		
-		Mathf.Clamp (prob, 1f, 2f);
+
 	}
 	
 	override public void nextState() {
 		//		Debug.Log ("prob " + prob);
-		if (prob < 1.7f) {
+		if (prob < 1.6f) {
 			nextStarState = "Stellar Nebula";
-		} else if (prob < 1.9f) {
+		} else if (prob < 1.7f) {
 			nextStarState = "Neutron Star";
 		} else {
 			nextStarState = "Black Hole";
