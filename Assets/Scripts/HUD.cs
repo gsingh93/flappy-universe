@@ -10,7 +10,7 @@ public class HUD : MonoBehaviour {
 	private const int HUDWidth = 200;
 	public const int Dim = 200;
 
-	private float date = 1.0f;
+	private float years = 1.0f;
 
 	private float turnTime = 0.5f;
 	
@@ -54,7 +54,7 @@ public class HUD : MonoBehaviour {
 		startPosition = transform.position;
 		player = GetComponent<Player>();
 		style.fontSize = 31;
-		point = new Vector3 ();
+		point = new Vector3();
 	}
 
 	public void Update() {
@@ -120,7 +120,7 @@ public class HUD : MonoBehaviour {
 
 		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
-			date += turnTime;
+			years += turnTime;
 		}
 
 		energyLabelStyle.fontSize = 20;
@@ -132,8 +132,8 @@ public class HUD : MonoBehaviour {
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight*2 - 10, 100, 30), text, energyLabelStyle);
 
-		text = "Date: " + date + " AD";
+		text = "Time elapsed: " + years + " billion years";
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
-		GUI.Label(new Rect(Screen.width - 150, 10, textHeight, 30), text, energyLabelStyle);
+		GUI.Label(new Rect(Screen.width - 260, 10, textHeight, 30), text, energyLabelStyle);
 	}
 }
