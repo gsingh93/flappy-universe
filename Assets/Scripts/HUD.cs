@@ -4,7 +4,7 @@ using System.Collections;
 public class HUD : MonoBehaviour {
 
 	private const int buttonWidth = 150;
-	private const int maxZoom = -15;
+	private const int maxZoom = -10;
 	private const int minZoom = -100;
 	private const int HUDHeight = 150;
 	private const int HUDWidth = 200;
