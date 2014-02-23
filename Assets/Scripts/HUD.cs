@@ -136,5 +136,9 @@ public class HUD : MonoBehaviour {
 		string text = "Energy: " + player.resources;
 		int textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight - 10, 100, 30), text, energyLabelStyle);
+
+		text = "Planets: " + player.planets.Count;
+		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
+		GUI.Label(new Rect(10, Screen.height - textHeight*2 - 10, 100, 30), text, energyLabelStyle);
 	}
 }
