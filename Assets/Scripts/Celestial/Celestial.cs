@@ -122,10 +122,12 @@ public abstract class Celestial : SelectableObject {
 
 	public override string getDescription ()
 	{
-//		if (!permState)
-//			return turnsLeft + " Turns to " + nextStarState;
+		string description = prob.ToString () + " Solar Masses";
+		if (!permState) {
+			description += "\n" + turnsLeft + " Turns to " + nextStarState;
+		}
 
-		return prob.ToString() + " Solar Masses";
+		return description;
 	}
 
 	public override MenuOption[] getOptions ()

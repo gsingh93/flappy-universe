@@ -216,7 +216,7 @@ MonoBehaviour:
     m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -275,6 +275,7 @@ MonoBehaviour:
   lblShowing: 1
   permState: 0
   starLabelOffset: 0
+  solarOutput: 150
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
