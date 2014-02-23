@@ -19,7 +19,7 @@ public class BlackHole : Celestial {
 		}
 	}
 
-	new private void Update () {
+	private void Update () {
 
 		for (int i = 0; i < planets.Count; i++) {
 			if (planets[i] == null) {
