@@ -22,7 +22,7 @@ public abstract class Celestial : SelectableObject {
 
 	private int lblWidth = 1;
 	private int lblHeight = 1;
-
+	private Color prevColor;
 
 	new protected void Start () {
 		base.Start ();
@@ -31,7 +31,9 @@ public abstract class Celestial : SelectableObject {
 		prob = Random.Range (0.01f, 2f);
 
 		Camera.main.GetComponent<Player> ().addCelestialBody(this);
-
+		if (Camera.main.GetComponent<Player> ().solarSystems.Contains(transform.parent.gameObject)) {
+			starTypeStyle.normal.textColor = Color.green;
+		}
 	}
 
 	protected void OnGUI () {
@@ -47,6 +49,14 @@ public abstract class Celestial : SelectableObject {
 //			starTypeStyle.fontSize = (int) (250f/distToCam*Screen.width/550f);
 			starLabelStyle.fontSize = (int) (Screen.width/60f);
 			starTypeStyle.fontSize = (int) (Screen.width/50f);
+
+			if (turnsLeft < 3) {
+				prevColor = starTypeStyle.normal.textColor;
+				if (Camera.main.GetComponent<Player> ().solarSystems.Contains(transform.parent.gameObject))
+					starTypeStyle.normal.textColor = Color.red;
+				else
+					starTypeStyle.normal.textColor = Color.yellow;
+			} 
 
 			GUI.Box (new Rect(p.x,Screen.height-p.y+(200f/distToCam*Screen.height/125f)+transform.localScale.x/0.25f,lblWidth,lblHeight), stateType, starTypeStyle);
 			if (!permState)
@@ -65,12 +75,14 @@ public abstract class Celestial : SelectableObject {
 	}
 	
 	virtual public void nextState () {
-		
+
+
 		rigidbody.isKinematic = true;
 		collider.isTrigger = true;
 		renderer.enabled = false;
 		(gameObject.GetComponent ("Halo") as Behaviour).enabled = false;
 		lblShowing = false;
+		starTypeStyle.normal.textColor = prevColor;
 		
 		nextCelestial = (GameObject)Instantiate(Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
 		finalScale = nextCelestial.transform.localScale.x;
