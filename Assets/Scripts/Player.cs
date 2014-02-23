@@ -7,16 +7,24 @@ public class Player : MonoBehaviour {
 	public int turnNumber = 0;
 	public int resources = 50;
 	public List<Planet> planets;
+	public List<GameObject> solarSystems;
 
 	public List<Celestial> celestialBodies;
-
+	
 	public void claimPlanet(Planet planet) {
 		planets.Add (planet);
 		planet.claimed = true;
+
+		solarSystems.Add (planet.transform.parent.gameObject);
+
+		Celestial tmp = planet.transform.parent.GetComponentInChildren<Celestial> ();
+		if (tmp.turnsLeft > 2)
+			tmp.starTypeStyle.normal.textColor = Color.green;
 	}
 
 	public void addCelestialBody(Celestial celest) {
 		celestialBodies.Add(celest);
+//		celest.starTypeStyle.normal.textColor = Color.green;
 	}
 
 	public void turnFinish () {
@@ -28,12 +36,13 @@ public class Player : MonoBehaviour {
 		
 		for (int i=0; i<celestialBodies.Count; i++) {
 			Celestial c = celestialBodies[i];
-
-			c.turnsLeft--;
-			if (c.turnsLeft <= 0 && !c.permState) {
-				celestialBodies.Remove(c);
-				c.nextState();
-				i--;
+			if (!c.permState) {
+				c.turnsLeft--;
+				if (c.turnsLeft <= 0) {
+					celestialBodies.Remove(c);
+					c.nextState();
+					i--;
+				}
 			}
 		}
 	}

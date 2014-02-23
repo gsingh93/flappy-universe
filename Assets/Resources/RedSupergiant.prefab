@@ -260,7 +260,7 @@ MonoBehaviour:
       m_Bottom: 0
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 0
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_Alignment: 1
     m_WordWrap: 0
     m_RichText: 1
@@ -274,7 +274,9 @@ MonoBehaviour:
   nextStarState: 
   lblShowing: 1
   permState: 0
+  shouldGeneratePlanets: 1
   starLabelOffset: 0
+  solarOutput: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
