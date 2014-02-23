@@ -25,6 +25,8 @@ public class HUD : MonoBehaviour {
 	}
 
 	public GUIStyle style = new GUIStyle();
+	public GUIStyle energyLabelStyle = new GUIStyle ();
+	public float energyLabelStyleFontSize = 60f;
 
 	public Ship shipToPickDestinationFor;
 
@@ -111,6 +113,7 @@ public class HUD : MonoBehaviour {
 			player.turnFinish();
 		}
 
-		GUI.Label(new Rect(10, Screen.height - 30, 100, 30), ("Energy: " + player.resources));
+		energyLabelStyle.fontSize = (int) (Screen.width / energyLabelStyleFontSize);
+		GUI.Label(new Rect(10, Screen.height - 40, 100, 30), ("Energy: " + player.resources), energyLabelStyle);
 	}
 }
