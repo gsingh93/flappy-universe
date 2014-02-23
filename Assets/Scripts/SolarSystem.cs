@@ -16,7 +16,13 @@ public class SolarSystem : MonoBehaviour {
 
 	private int numPlanets;
 
+	private void Awake() {
+		Debug.Log ("awake");
+	}
+
 	private void Start() {
+		Debug.Log ("here2");
+		
 		if (ourSolarSystem) {
 			GenerateOurSolarSystem();
 		} else {
@@ -25,7 +31,8 @@ public class SolarSystem : MonoBehaviour {
 	}
 	
 	public void GenerateOurSolarSystem() {
-		celestial = Instantiate (celestialPrefabs [0]) as Celestial;
+		celestial = Instantiate(celestialPrefabs[0]) as Celestial;
+		celestial.transform.parent = transform;
 		
 		string[] ourPlanets = new string[] {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
 		numPlanets = ourPlanets.Length;
@@ -52,6 +59,7 @@ public class SolarSystem : MonoBehaviour {
 		int celestialIndex = (int) (Random.value * celestialPrefabs.Length);
 		celestial = Instantiate (celestialPrefabs[celestialIndex]) as Celestial;
 		celestial.transform.position = transform.position;
+		celestial.transform.parent = transform;
 		
 		numPlanets = Random.Range(minPlanets, maxPlanets);
 		
@@ -65,4 +73,8 @@ public class SolarSystem : MonoBehaviour {
 			planets.Add(planet);
 		}
 	}
+
+//	private void OnCollisionEnter(Collision other) {
+//		//transform.position = new Vector3(Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim), Random.Range(0, HUD.Dim));
+//	}
 }
