@@ -8,8 +8,7 @@ public class NeutronStar : Celestial {
 		
 		stateType = "Neutron Star";
 		starLabelOffset = 2.33f;
-		
-		Mathf.Clamp (prob, 1.7f, 1.9f);
+
 	}
 	
 	

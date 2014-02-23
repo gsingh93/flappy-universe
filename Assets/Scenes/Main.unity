@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numSystems: 10
   solarSystemPrefab: {fileID: 11400000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
+  sSystems: []
 --- !u!1 &1197561116
 GameObject:
   m_ObjectHideFlags: 0

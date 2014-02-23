@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GenerateUniverse : MonoBehaviour {
 
 	public int numSystems = 2;
 	public SolarSystem solarSystemPrefab;
+	public List<GameObject> sSystems;
 
 	void Start() {
 		SolarSystem s = Instantiate(solarSystemPrefab) as SolarSystem;
@@ -15,5 +17,7 @@ public class GenerateUniverse : MonoBehaviour {
 			s = Instantiate(solarSystemPrefab) as SolarSystem;
 			s.transform.parent = transform; 
 		}
+
+
 	}
 }

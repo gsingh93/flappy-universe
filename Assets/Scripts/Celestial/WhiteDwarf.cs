@@ -11,6 +11,6 @@ public class WhiteDwarf : Celestial {
 
 		solarOutput = 50;
 	}
-	
+
 	
 }
