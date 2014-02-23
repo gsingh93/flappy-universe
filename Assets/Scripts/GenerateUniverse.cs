@@ -19,18 +19,22 @@ public class GenerateUniverse : MonoBehaviour {
 				return false;
 			}
 			
-			return base.Equals(obj) && this == p;
+			return base.Equals(obj) && x == p.x && y == p.y;
 		}
 
 		public override int GetHashCode() {
 			return x + 20 * y;
+		}
+
+		public override string ToString() {
+			return x + "," + y;
 		}
 	}
 	
 	public int numSystems = 2;
 	public SolarSystem solarSystemPrefab;
 
-	private HashSet<Pair> points = new HashSet<Pair>();
+	private HashSet<string> points = new HashSet<string>();
 
 	void Start() {
 		SolarSystem s = Instantiate(solarSystemPrefab) as SolarSystem;
@@ -40,13 +44,15 @@ public class GenerateUniverse : MonoBehaviour {
 
 		int cellSize = 50;
 		int rowSize = 2 * HUD.Dim / cellSize;
-		
+
+		Pair point = new Pair(HUD.Dim / cellSize, HUD.Dim / cellSize);
+		points.Add(point.ToString());
+
 		for (int i = 0; i < numSystems - 1; i++) {
-			Pair point = new Pair(0, 0);
 			do {
-				points.Add(point);
 				point = new Pair(Random.Range(0, rowSize), Random.Range(0, rowSize));
-			} while (points.Contains(point));
+			} while (points.Contains(point.ToString()));
+			points.Add(point.ToString());
 
 			s = Instantiate(solarSystemPrefab) as SolarSystem;
 			s.transform.parent = transform;
