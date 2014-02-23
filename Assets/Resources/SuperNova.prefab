@@ -30,9 +30,10 @@ GameObject:
   - 114: {fileID: 11400002}
   - 122: {fileID: 12200000}
   - 54: {fileID: 5400000}
+  - 123: {fileID: 12300000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: StellarNebula
+  m_Name: SuperNova
   m_TagString: Celestial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.61198664, y: 1.34224701, z: -15.226038}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 400000}
@@ -73,7 +74,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ad71004276f8b4640a524516738c4093, type: 2}
+  - {fileID: 2100000, guid: 7527ab4715e834811b0fd67fd49a114e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -147,11 +148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a8c38e8cd574cdfa277f5cad4dee60, type: 3}
+  m_Script: {fileID: 11500000, guid: d002b9cfd99d945f0b4b5a832115087e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
-  stateType: 
+  stateType: Super Nova
   turnsLeft: 5
   starLabelStyle:
     m_Name: 
@@ -199,7 +200,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 0
     m_FontStyle: 0
     m_Alignment: 1
@@ -296,8 +297,23 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 3830260563
-  m_Size: 13
+    rgba: 4278243071
+  m_Size: 4
+--- !u!123 &12300000
+LensFlare:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_Flare: {fileID: 12100000, guid: 91ef6e583c2344ab1b283cd5a02c822c, type: 2}
+  m_Color: {r: .926470578, g: .249188602, b: 0, a: 0}
+  m_Brightness: 1
+  m_FadeSpeed: 3
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 6
+  m_Directional: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

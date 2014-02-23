@@ -8,8 +8,7 @@ public class RedSuperGiant : Celestial {
 		base.Start ();
 		
 		stateType = "Red Supergiant";
-//		nextStarState = "Super Nova";
-		nextStarState = "Stellar Nebula";
+		nextStarState = "Super Nova";
 		starLabelOffset = 0f;
 		solarOutput = 300;
 	}
