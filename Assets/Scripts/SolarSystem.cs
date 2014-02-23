@@ -76,6 +76,8 @@ public class SolarSystem : MonoBehaviour {
 			revolution.speed = Random.value * (Planet.maxSpeed - Planet.minSpeed) + Planet.minSpeed;
 			
 			float scale = Random.Range(0.5f, 2.5f);
+			planet.transform.localScale = new Vector3(scale, scale, scale);
+
 			float radius = systemEdge + scale / 2 + Random.Range(0.5f, 1.5f);
 			
 			revolution.radius = radius;
