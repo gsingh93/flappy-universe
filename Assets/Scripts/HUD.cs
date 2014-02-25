@@ -6,13 +6,14 @@ public class HUD : MonoBehaviour {
 	private const int buttonWidth = 150;
 	private const int maxZoom = -10;
 	private const int minZoom = -200;
-	private const int HUDHeight = 150;
-	private const int HUDWidth = 200;
+	public Rect HUDRect = new Rect (10, 10, 200, 150);
 	public const int Dim = 200;
 
 	private float years = 1.0f;
 
 	private float turnTime = 0.5f;
+
+	private GUILayer guilayer;
 	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
@@ -20,6 +21,7 @@ public class HUD : MonoBehaviour {
 		get { return _selectedObject; }
 		set {
 			_selectedObject = value;
+
 			if (value == null)
 				player.showLabels();
 			else
@@ -39,7 +41,7 @@ public class HUD : MonoBehaviour {
 
 	public float speed = 0.25f;
 
-	private Vector3 startPosition;
+	public Vector3 startPosition;
 	private Vector3 targetPosition;
 	
 	protected Vector3 point;
@@ -55,6 +57,7 @@ public class HUD : MonoBehaviour {
 		player = GetComponent<Player>();
 		style.fontSize = 31;
 		point = new Vector3();
+		guilayer = GetComponent<GUILayer> ();
 	}
 
 	public void Update() {
@@ -79,6 +82,7 @@ public class HUD : MonoBehaviour {
 				startPosition = transform.position;
 			}
 		}
+
 	}
 
 	private void LateUpdate() {
@@ -94,26 +98,15 @@ public class HUD : MonoBehaviour {
 	private void OnGUI () {
 		GUI.skin.button.wordWrap = true;
 		if (selectedObject != null) {
-			GUI.Box(new Rect(0, 0, HUDWidth, HUDHeight),
-			        selectedObject.getName() + "\n" + selectedObject.getDescription());
+			Vector3 pos = Camera.main.WorldToScreenPoint(selectedObject.gameObject.transform.position + new Vector3(selectedObject.gameObject.transform.localScale.x/1.2f, -1.5f*selectedObject.gameObject.transform.localScale.y, 0));
+			HUDRect.x = pos.x;
+			HUDRect.y = pos.y;
+			HUDRect = GUI.Window(1, HUDRect, PlanetWindow, selectedObject.getName() + "\n" + selectedObject.getDescription());
 
-			MenuOption[] options = selectedObject.getOptions();
-			for (int i = 0; i < options.Length; i++) {
-				string buttonText = options[i].name;
-				if (options[i].cost > 0) {
-                	buttonText += " (costs " + options[i].cost + " energy)";
-               	}
-				if (player.resources < options[i].cost) {
-					GUI.enabled = false;
-				}
-				float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
-				if (GUI.Button(new Rect (20, 70 + 40 * (i + 1), buttonWidth, height), buttonText)) {
-					selectedObject.OnOptionSelected(options[i]);
-				}
-				GUI.enabled = true;
-			}
-
-			if (GUI.Button(new Rect(180, 0, 20, 20), "x")) {
+			Event e = Event.current;
+			
+			if (e.type == EventType.MouseDown && !HUDRect.Contains(e.mousePosition))
+			{
 				selectedObject = null;
 			}
 		}
@@ -135,5 +128,32 @@ public class HUD : MonoBehaviour {
 		text = "Time elapsed: " + years + " billion years";
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(Screen.width - 260, 10, textHeight, 30), text, energyLabelStyle);
+	}
+
+	private void PlanetWindow (int windowID) {
+//		GUI.Box(new Rect(10, 10, HUDWidth, HUDHeight),
+//		        selectedObject.getName() + "\n" + selectedObject.getDescription());
+		
+		MenuOption[] options = selectedObject.getOptions();
+		for (int i = 0; i < options.Length; i++) {
+			string buttonText = options[i].name;
+			if (options[i].cost > 0) {
+				buttonText += " (costs " + options[i].cost + " energy)";
+			}
+			if (player.resources < options[i].cost) {
+				GUI.enabled = false;
+			}
+			float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
+			if (GUI.Button(new Rect (20, 70 + 40 * (i + 1), buttonWidth, height), buttonText)) {
+				selectedObject.OnOptionSelected(options[i]);
+			}
+			GUI.enabled = true;
+		}
+		
+//		if (GUI.Button(new Rect(180, 0, 20, 20), "x")) {
+//
+//		}
+
+		GUI.DragWindow(new Rect(0, 0, 10000, 20));
 	}
 }

@@ -14,7 +14,7 @@ public abstract class Celestial : SelectableObject {
 
 	protected float prob = 50;
 	public float starLabelOffset = 0f;
-	protected float transitionTime = 0.5f;
+	protected float transitionTime = 2f;
 	protected int bodyMass;
 	public int solarOutput;
 	protected GameObject nextCelestial;

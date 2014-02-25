@@ -207,6 +207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cf591c7273d45abb75c8255ee4246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HUDRect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 200
+    height: 150
   style:
     m_Name: 
     m_Normal:
@@ -330,6 +336,7 @@ MonoBehaviour:
   player: {fileID: 0}
   u: .5
   speed: .699999988
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1197561123
 MonoBehaviour:
   m_ObjectHideFlags: 0

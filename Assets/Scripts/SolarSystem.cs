@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SolarSystem : SelectableObject {
+public class SolarSystem : MonoBehaviour {
 
 	public Planet planetPrefab;
 	public bool ourSolarSystem = false;
@@ -15,6 +15,7 @@ public class SolarSystem : SelectableObject {
 	public const int maxPlanets = 10;
 
 	private int numPlanets;
+	private HUD hud;
 
 	private void Start() {
 		if (ourSolarSystem) {
@@ -24,7 +25,6 @@ public class SolarSystem : SelectableObject {
 		}
 
 		hud = Camera.main.GetComponent<HUD> ();
-		player = Camera.main.GetComponent<Player> ();
 	}
 
 	public float getSolarOutput() {
@@ -90,30 +90,7 @@ public class SolarSystem : SelectableObject {
 		}
 	}
 
-	#region implemented abstract members of SelectableObject
-	
-	public override string getName ()
-	{
-		return "The " + GetComponentInChildren<Celestial>().gameObject.name.Replace("(Clone)", "") + " Solar System";
+	private void OnMouseDown() {
+		hud.startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 30);
 	}
-	
-	public override string getDescription ()
-	{
-		if (player.solarSystems.Contains (this.gameObject))
-			return "Inhabited By User";
-		else
-			return "Not Yet Inhabited";
-	}
-	
-	public override MenuOption[] getOptions ()
-	{
-		return new MenuOption[0];
-	}
-	
-	public override void OnOptionSelected (MenuOption option)
-	{
-		return;
-	}
-	
-	#endregion
 }
