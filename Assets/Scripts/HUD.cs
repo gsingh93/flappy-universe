@@ -65,7 +65,9 @@ public class HUD : MonoBehaviour {
 			} else if (startPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
 				Camera.main.transform.position += Vector3.back;
 				startPosition = transform.position;
-			} else if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
+			}
+
+			if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
 				Camera.main.transform.position += speed * Vector3.right;
 				startPosition = transform.position;
 			} else if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
