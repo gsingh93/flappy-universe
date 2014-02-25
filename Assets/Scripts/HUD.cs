@@ -105,6 +105,7 @@ public class HUD : MonoBehaviour {
 				if (options[i].cost > 0) {
                 	buttonText += " (costs " + options[i].cost + " energy)";
                	}
+				GUI.enabled = options[i].enabled;
 				if (player.resources < options[i].cost) {
 					GUI.enabled = false;
 				}
