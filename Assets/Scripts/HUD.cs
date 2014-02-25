@@ -68,7 +68,9 @@ public class HUD : MonoBehaviour {
 			} else if (startPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
 				Camera.main.transform.position += Vector3.back;
 				startPosition = transform.position;
-			} else if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
+			}
+
+			if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
 				Camera.main.transform.position += speed * Vector3.right;
 				startPosition = transform.position;
 			} else if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
@@ -117,7 +119,7 @@ public class HUD : MonoBehaviour {
 		}
 
 		energyLabelStyle.fontSize = 20;
-		string text = "Energy: " + player.resources;
+		string text = "Energy: " + player.resources + " (+" + player.energyPerTurn() + "/Turn)";
 		int textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight - 10, 100, 30), text, energyLabelStyle);
 

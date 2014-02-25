@@ -42,6 +42,11 @@ public class Planet : SelectableObject {
 		new MenuOption (OPTION_BUILD_SOLAR_PANEL, 25),
 		new MenuOption (OPTION_BUILD_SHIP, 100)
 	};
+	private static MenuOption[] planetFullOptions = {
+		new MenuOption (OPTION_BUILD_MINE, 25, false),
+		new MenuOption (OPTION_BUILD_SOLAR_PANEL, 25, false),
+		new MenuOption (OPTION_BUILD_SHIP, 100)
+	};
 
 	new private void Start() {
 		base.Start();
@@ -91,7 +96,7 @@ public class Planet : SelectableObject {
 		}
 	}
 	
-	private int calculateEnergy(bool dryRun) {
+	public int calculateEnergy(bool dryRun) {
 		int numResources = 0;
 		foreach (Resource r in resources) {
 			numResources += r.harvestResources(this, dryRun);
@@ -147,10 +152,17 @@ public class Planet : SelectableObject {
 
 	public override MenuOption[] getOptions() {
 		if (claimed) {
-			return options;
+			// Build stuff on inhabited planet
+			if (resources.Count < totalSlots) {
+				return options;
+			} else {
+				return planetFullOptions;
+			}
 		} else if (hud.shipToPickDestinationFor != null) {
+			// Fly to uninhabited planet
 			return new MenuOption[] {FLY_TO_PLANET_OPTION};
 		} else {
+			// No options
 			return new MenuOption[0];
 		}
 	}
@@ -169,6 +181,7 @@ public class Planet : SelectableObject {
 		}
 
 		player.resources -= option.cost;
+
 		if (option.name == OPTION_BUILD_MINE && resources.Count < totalSlots) {
 			Mine mine = Instantiate(minePrefab) as Mine;
 			PlaceResource(mine);

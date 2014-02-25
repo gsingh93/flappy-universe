@@ -85,6 +85,8 @@ public class SolarSystem : MonoBehaviour {
 			
 			revolution.radius = radius;
 			systemEdge = radius + scale / 2;
+
+			planet.planetName = PlanetNameGenerator.generateName();;
 			
 			planets.Add(planet);
 		}

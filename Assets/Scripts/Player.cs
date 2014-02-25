@@ -47,6 +47,14 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public int energyPerTurn() {
+		int energy = 0;
+		foreach (Planet p in planets) {
+			energy += p.calculateEnergy(true);
+		}
+		return energy;
+	}
+
 	public void turnStart() {
 
 	}
