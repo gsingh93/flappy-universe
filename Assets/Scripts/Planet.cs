@@ -91,7 +91,7 @@ public class Planet : SelectableObject {
 		}
 	}
 	
-	private int calculateEnergy(bool dryRun) {
+	public int calculateEnergy(bool dryRun) {
 		int numResources = 0;
 		foreach (Resource r in resources) {
 			numResources += r.harvestResources(this, dryRun);

@@ -124,7 +124,7 @@ public class HUD : MonoBehaviour {
 		}
 
 		energyLabelStyle.fontSize = 20;
-		string text = "Energy: " + player.resources;
+		string text = "Energy: " + player.resources + " (+" + player.energyPerTurn() + "/Turn)";
 		int textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight - 10, 100, 30), text, energyLabelStyle);
 
