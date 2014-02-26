@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class Star : Celestial {
-
-	new private void Start () {
-		base.Start ();
+	private new void Start() {
+		base.Start();
 
 		stateType = "Yellow Star";
 		nextStarState = "Red Giant";
@@ -14,6 +13,4 @@ public class Star : Celestial {
 
 		turnsLeft = Random.Range (7, 15);
 	}
-
-
 }

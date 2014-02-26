@@ -2,10 +2,8 @@
 using System.Collections;
 
 public class RedSuperGiant : Celestial {
-	
-	
-	new private void Start () {
-		base.Start ();
+	private new void Start() {
+		base.Start();
 		
 		stateType = "Red Supergiant";
 		nextStarState = "Super Nova";
@@ -13,6 +11,4 @@ public class RedSuperGiant : Celestial {
 
 		solarOutput = 300;
 	}
-	
-	
 }

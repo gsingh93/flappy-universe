@@ -2,19 +2,20 @@
 using System.Collections;
 
 public class SuperNova : Celestial {
-	
-	new private void Start () {
-		base.Start ();
+
+	private new int minTurns = 1;
+	private new int maxTurns = 5;
+
+	private new void Start () {
+		base.Start();
 		
 		stateType = "SuperNova";
 		nextStarState = "?";
 
-		turnsLeft = Random.Range (1, 5);
-
+		turnsLeft = Random.Range(minTurns, maxTurns);
 	}
 	
 	override public void nextState() {
-		//		Debug.Log ("prob " + prob);
 		if (prob < 1.6f) {
 			nextStarState = "Stellar Nebula";
 		} else if (prob < 1.7f) {
@@ -23,8 +24,6 @@ public class SuperNova : Celestial {
 			nextStarState = "Black Hole";
 		}
 		
-		base.nextState ();
+		base.nextState();
 	}
 }
-
-

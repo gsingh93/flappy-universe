@@ -3,8 +3,11 @@ using System.Collections;
 
 public abstract class Celestial : SelectableObject {
 
+	public int minTurns = 5;
+	public int maxTurns = 7;
+
 	public string stateType;
-	public int turnsLeft = 5;
+	public int turnsLeft;
 	public GUIStyle starLabelStyle;
 	public GUIStyle starTypeStyle;
 	public string nextStarState;
@@ -16,40 +19,36 @@ public abstract class Celestial : SelectableObject {
 	protected float prob = 50;
 	public float starLabelOffset = 0f;
 	protected float transitionTime = 2f;
-	protected int bodyMass;
-	public int solarOutput = 100;
+	public int solarOutput;
 	protected GameObject nextCelestial;
-	protected float finalScale;
 
 	private int lblWidth = 1;
 	private int lblHeight = 1;
 	private Color prevColor;
 
-	new protected void Start () {
-		base.Start ();
+	protected new void Start () {
+		base.Start();
 
-		turnsLeft = Random.Range (5, 7);
-		prob = Random.Range (0.01f, 2f);
+		turnsLeft = Random.Range(minTurns, maxTurns);
+		prob = Random.Range(0.01f, 2f);
 
-		Camera.main.GetComponent<Player> ().addCelestialBody(this);
-		if (Camera.main.GetComponent<Player> ().solarSystems.Contains(transform.parent.gameObject)) {
+		Player p = Camera.main.GetComponent<Player>();
+		p.addCelestialBody(this);
+		if (p.solarSystems.Contains(transform.parent.gameObject)) {
 			starTypeStyle.normal.textColor = Color.green;
 		}
 	}
 
 	protected void OnGUI () {
-
 		if (lblShowing) {
-			float distToCam = (transform.position.z - Camera.main.transform.position.z);
+			float distToCam = transform.position.z - Camera.main.transform.position.z;
 
-			Vector3 offset = new Vector3 (-transform.lossyScale.x * starLabelOffset, transform.lossyScale.y, 0);
+			Vector3 offset = new Vector3(-transform.lossyScale.x * starLabelOffset, transform.lossyScale.y, 0);
 			var p = Camera.main.WorldToScreenPoint(transform.position);
 			p += offset;
 
-//			starLabelStyle.fontSize = (int) (200f/distToCam*Screen.width/600f);
-//			starTypeStyle.fontSize = (int) (250f/distToCam*Screen.width/550f);
-			starLabelStyle.fontSize = (int) (Screen.width/60f);
-			starTypeStyle.fontSize = (int) (Screen.width/50f);
+			starLabelStyle.fontSize = (int) (Screen.width / 60f);
+			starTypeStyle.fontSize = (int) (Screen.width / 50f);
 
 			if (turnsLeft < 3) {
 				prevColor = starTypeStyle.normal.textColor;
@@ -66,44 +65,45 @@ public abstract class Celestial : SelectableObject {
 	}
 
 	protected void OnCollisionStay (Collision col) {
-		if (col.gameObject.tag != "Celestial" && col.gameObject.transform.parent == transform.parent)
+		if (col.gameObject.tag != "Celestial") {
 			Destroy(col.gameObject);
+		}
 	}
 
 	protected void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag != "Celestial" && col.gameObject.transform.parent == transform.parent)
+		if (col.gameObject.tag != "Celestial") {
 			Destroy(col.gameObject);
+		}
 	}
 	
-	virtual public void nextState () {
-
-
+	public virtual void nextState() {
 		rigidbody.isKinematic = true;
 		collider.isTrigger = true;
 		renderer.enabled = false;
-		(gameObject.GetComponent ("Halo") as Behaviour).enabled = false;
+		(gameObject.GetComponent("Halo") as Behaviour).enabled = false;
 		lblShowing = false;
 		starTypeStyle.normal.textColor = prevColor;
 		
-		nextCelestial = (GameObject)Instantiate(Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
-		finalScale = nextCelestial.transform.localScale.x;
+		nextCelestial = (GameObject)Instantiate(
+					Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
+		float finalScale = nextCelestial.transform.localScale.x;
 		nextCelestial.transform.parent = transform.parent;
 
-		Celestial temp = nextCelestial.GetComponent<Celestial> ();
+		Celestial temp = nextCelestial.GetComponent<Celestial>();
 		temp.lblShowing = false;
 		temp.prob = prob;
 		nextCelestial.transform.localScale = transform.localScale;
 
-		transform.parent.GetComponent<SolarSystem> ().celestial = nextCelestial.GetComponent<Celestial>();
+		transform.parent.GetComponent<SolarSystem>().celestial = nextCelestial.GetComponent<Celestial>();
 
-		StartCoroutine ("growStar");
+		StartCoroutine(growStar(finalScale));
 	}
 	
-	virtual protected IEnumerator growStar () {
+	protected virtual IEnumerator growStar(float finalScale) {
 		float growTimer = 0f;
-		float changeVel;
-		Vector3 changeVect = new Vector3 ();
+		Vector3 changeVect = new Vector3();
 
+		float changeVel;
 		if (finalScale > transform.localScale.x) {
 			changeVel = (finalScale - transform.localScale.x) / transitionTime;
 		} else {
@@ -115,12 +115,13 @@ public abstract class Celestial : SelectableObject {
 
 			growTimer += Time.deltaTime;
 			
-			changeVect.x = changeVect.y = changeVect.z = Mathf.Clamp01(changeVel*growTimer)*(finalScale - transform.localScale.x)+transform.localScale.x;
+			changeVect.x = changeVect.y = changeVect.z = Mathf.Clamp01(changeVel * growTimer) *
+						(finalScale - transform.localScale.x) + transform.localScale.x;
 			nextCelestial.transform.localScale = changeVect;
 			
 			yield return null;
 		}
-		
+
 		nextCelestial.GetComponent<Celestial> ().lblShowing = true;
 		Destroy (gameObject);  
 		hud.actionEnabled = true;
@@ -129,16 +130,14 @@ public abstract class Celestial : SelectableObject {
 	void OnBecameVisible() {
 		hasBeenSeen = true;
 	}
-	
-	#region implemented abstract members of SelectableObject
 
-	public override string getName ()
-	{
+	#region SelectableObject members
+
+	public override string getName() {
 		return stateType;
 	}
 
-	public override string getDescription ()
-	{
+	public override string getDescription()	{
 		string description = prob.ToString () + " Solar Masses";
 		if (!permState) {
 			description += "\n" + turnsLeft + " Turns to " + nextStarState;
@@ -147,14 +146,8 @@ public abstract class Celestial : SelectableObject {
 		return description;
 	}
 
-	public override MenuOption[] getOptions ()
-	{
+	public override MenuOption[] getOptions() {
 		return new MenuOption[0];
-	}
-
-	public override void OnOptionSelected (MenuOption option)
-	{
-		return;
 	}
 
 	#endregion

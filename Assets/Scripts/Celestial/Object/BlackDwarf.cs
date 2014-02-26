@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class BlackDwarf : Celestial {
-	
-	new private void Start () {
+	private new void Start () {
 		base.Start ();
 		
 		stateType = "Black Dwarf";
@@ -11,6 +10,4 @@ public class BlackDwarf : Celestial {
 
 		solarOutput = 0;
 	}
-	
-	
 }

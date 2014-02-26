@@ -3,17 +3,17 @@ using System.Collections;
 
 public class RedGiant : Celestial {
 
+	private new int minTurns = 3;
+	private new int maxTurns = 3;
 
-	new private void Start () {
-		base.Start ();
+	private new void Start() {
+		base.Start();
 		
 		stateType = "Red Giant";
 		nextStarState = "White Dwarf";
 		starLabelOffset = 0f;
-		turnsLeft = 3;
+		turnsLeft = Random.Range(minTurns, maxTurns);
 
 		solarOutput = 200;
 	}
-
-	
 }
