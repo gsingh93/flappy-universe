@@ -8,10 +8,10 @@ public class StellarNebula : Celestial {
 		shouldGeneratePlanets = false;
 	}
 
-	new private void Start () {
-		base.Start ();
+	private new void Start () {
+		base.Start();
 
-		foreach (Planet p in transform.parent.GetComponentsInChildren<Planet> ()) {
+		foreach (Planet p in transform.parent.GetComponentsInChildren<Planet>()) {
 			Destroy(p.gameObject);
 		}
 		
@@ -21,18 +21,16 @@ public class StellarNebula : Celestial {
 		solarOutput = 0;
 	}
 	
-	override public void nextState() {
-//		Debug.Log ("prob " + prob);
+	public override void nextState() {
+		// TODO: WTF
 		if (prob < 1f) {
 			nextStarState = "Star";
 		} else {
 			nextStarState = "Massive Star";
 		}
 
-		base.nextState ();
+		base.nextState();
 
 		transform.parent.GetComponent<SolarSystem> ().GenerateRandomPlanets ();
 	}
 }
-
-

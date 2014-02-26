@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class MassiveStar : Celestial {
-	
-	new private void Start () {
-		base.Start ();
+	private new void Start() {
+		base.Start();
 		
 		stateType = "Massive Star";
 		nextStarState = "Red Supergiant";
