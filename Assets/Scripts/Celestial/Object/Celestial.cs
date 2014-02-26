@@ -18,10 +18,8 @@ public abstract class Celestial : SelectableObject {
 	protected float prob = 50;
 	public float starLabelOffset = 0f;
 	protected float transitionTime = 2f;
-	protected int bodyMass;
 	public int solarOutput;
 	protected GameObject nextCelestial;
-	protected float finalScale;
 
 	private int lblWidth = 1;
 	private int lblHeight = 1;
@@ -77,7 +75,7 @@ public abstract class Celestial : SelectableObject {
 		}
 	}
 	
-	public virtual void nextState () {
+	public virtual void nextState() {
 		rigidbody.isKinematic = true;
 		collider.isTrigger = true;
 		renderer.enabled = false;
@@ -87,7 +85,7 @@ public abstract class Celestial : SelectableObject {
 		
 		nextCelestial = (GameObject)Instantiate(
 					Resources.Load(nextStarState.Replace(" ", "")), transform.position, transform.rotation);
-		finalScale = nextCelestial.transform.localScale.x;
+		float finalScale = nextCelestial.transform.localScale.x;
 		nextCelestial.transform.parent = transform.parent;
 
 		Celestial temp = nextCelestial.GetComponent<Celestial>();
@@ -97,10 +95,10 @@ public abstract class Celestial : SelectableObject {
 
 		transform.parent.GetComponent<SolarSystem>().celestial = nextCelestial.GetComponent<Celestial>();
 
-		StartCoroutine(growStar());
+		StartCoroutine(growStar(finalScale));
 	}
 	
-	protected virtual IEnumerator growStar() {
+	protected virtual IEnumerator growStar(float finalScale) {
 		float growTimer = 0f;
 		Vector3 changeVect = new Vector3();
 

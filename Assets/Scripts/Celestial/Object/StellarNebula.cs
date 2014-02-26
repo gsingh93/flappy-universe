@@ -2,20 +2,19 @@
 using System.Collections;
 
 public class StellarNebula : Celestial {
-	public static string StateType = "Stellar Nebula";
 
 	private void Awake() {
 		shouldGeneratePlanets = false;
 	}
 
-	private new void Start () {
+	private new void Start() {
 		base.Start();
 
 		foreach (Planet p in transform.parent.GetComponentsInChildren<Planet>()) {
 			Destroy(p.gameObject);
 		}
 		
-		stateType = StateType;
+		stateType = "Stellar Nebula";
 		nextStarState = "Star";
 
 		solarOutput = 0;
@@ -31,6 +30,6 @@ public class StellarNebula : Celestial {
 
 		base.nextState();
 
-		transform.parent.GetComponent<SolarSystem> ().GenerateRandomPlanets ();
+		transform.parent.GetComponent<SolarSystem>().GenerateRandomPlanets ();
 	}
 }
