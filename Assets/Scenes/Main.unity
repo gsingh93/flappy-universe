@@ -112,9 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187d1e8f0b6b2f84ab457367339c47c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  solarSystems:
-  - {fileID: 0}
-  - {fileID: 0}
+  numSystems: 10
   solarSystemPrefab: {fileID: 11400000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
 --- !u!1 &1197561116
 GameObject:
