@@ -6,9 +6,9 @@ public class Player : MonoBehaviour {
 	
 	public int turnNumber = 0;
 	public int resources = 50;
+
 	public List<Planet> planets;
 	public List<GameObject> solarSystems;
-
 	public List<Celestial> celestialBodies;
 	
 	public void claimPlanet(Planet planet) {
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
 			solarSystems.Add(s);
 		}
 
-		Celestial tmp = planet.transform.parent.GetComponentInChildren<Celestial>();
+		Celestial tmp = s.GetComponentInChildren<Celestial>();
 		if (tmp.turnsLeft > 2) {
 			tmp.starTypeStyle.normal.textColor = Color.green;
 		}
@@ -28,7 +28,6 @@ public class Player : MonoBehaviour {
 
 	public void addCelestialBody(Celestial celest) {
 		celestialBodies.Add(celest);
-//		celest.starTypeStyle.normal.textColor = Color.green;
 	}
 
 	public void turnFinish () {
@@ -38,7 +37,7 @@ public class Player : MonoBehaviour {
 			resources += p.harvestEnergy();
 		}
 		
-		for (int i=0; i<celestialBodies.Count; i++) {
+		for (int i = 0; i < celestialBodies.Count; i++) {
 			Celestial c = celestialBodies[i];
 			if (!c.permState) {
 				c.turnsLeft--;
@@ -59,10 +58,6 @@ public class Player : MonoBehaviour {
 		return energy;
 	}
 
-	public void turnStart() {
-
-	}
-
 	public void hideLabels() {
 		foreach (Celestial c in celestialBodies) {
 			c.lblShowing = false;
@@ -74,5 +69,4 @@ public class Player : MonoBehaviour {
 			c.lblShowing = true;
 		}
 	}
-
 }
