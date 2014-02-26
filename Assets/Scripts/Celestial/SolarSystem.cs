@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -93,6 +93,6 @@ public class SolarSystem : MonoBehaviour {
 	}
 
 	private void OnMouseDown() {
-		hud.startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 30);
+		hud.cameraPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 30);
 	}
 }

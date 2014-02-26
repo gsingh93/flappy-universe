@@ -6,11 +6,13 @@ public class HUD : MonoBehaviour {
 	private const int buttonWidth = 185;
 	private const int maxZoom = -10;
 	private const int minZoom = -200;
-	public Rect HUDRect = new Rect (10, 10, 225, 250);
+	public Rect HUDRect;
 	public const int Dim = 200;
 
-	private float years = 1.0f;
+	public float u = 0.5f;
+	public float speed = 0.25f;
 
+	private float years = 1.0f;
 	private float turnTime = 0.5f;
 
 	private SelectableObject _selectedObject;
@@ -20,92 +22,94 @@ public class HUD : MonoBehaviour {
 		set {
 			_selectedObject = value;
 
-			if (value == null)
+			if (value == null) {
 				player.showLabels();
-			else
+			} else {
 				player.hideLabels();
+			}
 		}
-
 	}
 
 	public GUIStyle style = new GUIStyle();
-	public GUIStyle energyLabelStyle = new GUIStyle ();
-	public float energyLabelStyleFontSize = 60f;
+	public GUIStyle energyLabelStyle = new GUIStyle();
 
 	public Ship shipToPickDestinationFor;
-
-	public Player player;
-	public float u = 0.5f;
-
-	public float speed = 0.25f;
-
-	public Vector3 startPosition;
-	private Vector3 targetPosition;
 	
-	protected Vector3 point;
-	protected GameObject gobject;
+	public Vector3 cameraPosition;
+	private Vector3 targetPosition;
 
+	private Player player;
+	
 	public void PickPlanet(Ship ship) {
 		shipToPickDestinationFor = ship;
 		selectedObject = null;
 	}
 	
 	private void Start() {
-		startPosition = transform.position;
+		cameraPosition = transform.position;
 		player = GetComponent<Player>();
-		style.fontSize = 31;
-		point = new Vector3();
 	}
 
 	public void Update() {
+		// Handle camera movement if nothing is selected
 		if (selectedObject == null) {
-			if (startPosition.z < maxZoom && Input.GetKey(KeyCode.Z)) {
-				Camera.main.transform.position += Vector3.forward;
-				startPosition = transform.position;
-			} else if (startPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
-				Camera.main.transform.position += Vector3.back;
-				startPosition = transform.position;
+			Vector3 pos = Camera.main.transform.position;
+
+			// Zooming
+			if (cameraPosition.z < maxZoom && Input.GetKey(KeyCode.Z)) {
+				pos += Vector3.forward;
+				cameraPosition = pos;
+			} else if (cameraPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
+				pos += Vector3.back;
+				cameraPosition = pos;
 			}
 
-			if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
-				Camera.main.transform.position += speed * Vector3.right;
-				startPosition = transform.position;
-			} else if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
-				Camera.main.transform.position += speed * Vector3.left;
-				startPosition = transform.position;
-			} else if (startPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
-				Camera.main.transform.position += speed * Vector3.up;
-				startPosition = transform.position;
-			} else if (startPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
-				Camera.main.transform.position += speed * Vector3.down;
-				startPosition = transform.position;
+			// Horizontal and vertical movement
+			if (cameraPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
+				pos += speed * Vector3.right;
+				cameraPosition = pos;
+			} else if (cameraPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
+				pos += speed * Vector3.left;
+				cameraPosition = pos;
+			} else if (cameraPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
+				pos += speed * Vector3.up;
+				cameraPosition = pos;
+			} else if (cameraPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
+				pos += speed * Vector3.down;
+				cameraPosition = pos;
 			}
+
+			Camera.main.transform.position = pos;
 		}
-
 	}
 
 	private void LateUpdate() {
+		// Zoom in on the selected object if not null
 		if (selectedObject != null) {
-			targetPosition = selectedObject.transform.position +
-				new Vector3(0, 0, -5 - selectedObject.transform.localScale.z);
+			// We use the scale of the object to figure out how far away the camera should be. This is kind of hacky
+			Transform t = selectedObject.transform;
+			targetPosition = t.position + Vector3.back * (5 + t.localScale.z);
 		} else {
-			targetPosition = startPosition;
+			targetPosition = cameraPosition;
 		}
 		transform.position = (1 - u) * transform.position + u * targetPosition;
 	}
 
 	private void OnGUI () {
-		GUI.skin.button.wordWrap = true;
+		// Draw the HUD window when an object is selected
 		if (selectedObject != null) {
-			Vector3 pos = Camera.main.WorldToScreenPoint(selectedObject.gameObject.transform.position + new Vector3(selectedObject.gameObject.transform.localScale.x/1.2f, -1.5f*selectedObject.gameObject.transform.localScale.y, 0));
+			Transform t = selectedObject.gameObject.transform;
+
+			Vector3 pos = Camera.main.WorldToScreenPoint(t.position +
+			                                             new Vector3(t.localScale.x / 1.2f, -1.5f * t.localScale.y, 0));
 			HUDRect.x = pos.x;
 			HUDRect.y = pos.y;
-			HUDRect = GUI.Window(1, HUDRect, PlanetWindow, selectedObject.getName() + "\n\n" + selectedObject.getDescription() + "\n");
+			HUDRect = GUI.Window(1, HUDRect, PlanetWindow,
+			                     selectedObject.getName() + "\n\n" + selectedObject.getDescription() + "\n");
 
+			// Dismiss window when click outside HUD
 			Event e = Event.current;
-			
-			if (e.type == EventType.MouseDown && !HUDRect.Contains(e.mousePosition))
-			{
+			if (e.type == EventType.MouseDown && !HUDRect.Contains(e.mousePosition)) {
 				selectedObject = null;
 			}
 		}
@@ -115,21 +119,22 @@ public class HUD : MonoBehaviour {
 			years += turnTime;
 		}
 
-		energyLabelStyle.fontSize = 20;
+		// Draw information labels
 		string text = "Energy: " + player.resources + " (+" + player.energyPerTurn() + "/Turn)";
 		int textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
 		GUI.Label(new Rect(10, Screen.height - textHeight - 10, 100, 30), text, energyLabelStyle);
 
 		text = "Planets: " + player.planets.Count;
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
-		GUI.Label(new Rect(10, Screen.height - textHeight*2 - 10, 100, 30), text, energyLabelStyle);
+		GUI.Label(new Rect(10, Screen.height - textHeight * 2 - 10, 100, 30), text, energyLabelStyle);
 
 		text = "Time elapsed: " + years + " billion years";
 		textHeight = (int) energyLabelStyle.CalcHeight(new GUIContent(text), 500);
-		GUI.Label(new Rect(Screen.width - 260, 10, textHeight, 30), text, energyLabelStyle);
+		GUI.Label(new Rect(Screen.width - 270, 10, textHeight, 30), text, energyLabelStyle);
 	}
 
-	private void PlanetWindow (int windowID) {
+	private void PlanetWindow(int windowID) {
+		// Display all options in window
 		MenuOption[] options = selectedObject.getOptions();
 		for (int i = 0; i < options.Length; i++) {
 			string buttonText = options[i].name;
@@ -151,6 +156,5 @@ public class HUD : MonoBehaviour {
 		if (options.Length == 0) {
 			HUDRect.height = 105;
 		}
-
 	}
 }

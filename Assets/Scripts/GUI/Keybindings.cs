@@ -25,8 +25,8 @@ public class Keybindings : MonoBehaviour {
 				if (index != -1) {
 					index = (index + 1) % player.solarSystems.Count;
 					GameObject s = player.solarSystems[index];
-					hud.startPosition = s.transform.position;
-					hud.startPosition.z = -30;
+					hud.cameraPosition = s.transform.position;
+					hud.cameraPosition.z = -30;
 				}
 			}
 		}
