@@ -3,10 +3,10 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 
-	private const int buttonWidth = 150;
+	private const int buttonWidth = 185;
 	private const int maxZoom = -10;
 	private const int minZoom = -200;
-	public Rect HUDRect = new Rect (10, 10, 200, 150);
+	public Rect HUDRect = new Rect (10, 10, 225, 250);
 	public const int Dim = 200;
 
 	private float years = 1.0f;
@@ -103,7 +103,7 @@ public class HUD : MonoBehaviour {
 			Vector3 pos = Camera.main.WorldToScreenPoint(selectedObject.gameObject.transform.position + new Vector3(selectedObject.gameObject.transform.localScale.x/1.2f, -1.5f*selectedObject.gameObject.transform.localScale.y, 0));
 			HUDRect.x = pos.x;
 			HUDRect.y = pos.y;
-			HUDRect = GUI.Window(1, HUDRect, PlanetWindow, selectedObject.getName() + "\n" + selectedObject.getDescription());
+			HUDRect = GUI.Window(1, HUDRect, PlanetWindow, selectedObject.getName() + "\n\n" + selectedObject.getDescription() + "\n");
 
 			Event e = Event.current;
 			
@@ -133,9 +133,8 @@ public class HUD : MonoBehaviour {
 	}
 
 	private void PlanetWindow (int windowID) {
-//		GUI.Box(new Rect(10, 10, HUDWidth, HUDHeight),
-//		        selectedObject.getName() + "\n" + selectedObject.getDescription());
-		
+		int maxHeight = 0;
+
 		MenuOption[] options = selectedObject.getOptions();
 		for (int i = 0; i < options.Length; i++) {
 			string buttonText = options[i].name;
@@ -146,16 +145,17 @@ public class HUD : MonoBehaviour {
 				GUI.enabled = false;
 			}
 			float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
-			if (GUI.Button(new Rect (20, 70 + 40 * (i + 1), buttonWidth, height), buttonText)) {
+			if (GUI.Button(new Rect (20, 80 + 40 * (i + 1), buttonWidth, height), buttonText)) {
 				selectedObject.OnOptionSelected(options[i]);
 			}
 			GUI.enabled = true;
-		}
-		
-//		if (GUI.Button(new Rect(180, 0, 20, 20), "x")) {
-//
-//		}
 
-		GUI.DragWindow(new Rect(0, 0, 10000, 20));
+			HUDRect.height = 135 + 40 * (i + 1);
+		}
+
+		if (options.Length == 0) {
+			HUDRect.height = 105;
+		}
+
 	}
 }

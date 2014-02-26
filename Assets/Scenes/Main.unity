@@ -211,8 +211,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 10
     y: 10
-    width: 200
-    height: 150
+    width: 225
+    height: 250
   style:
     m_Name: 
     m_Normal:
