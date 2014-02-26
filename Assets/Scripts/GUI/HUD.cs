@@ -13,8 +13,6 @@ public class HUD : MonoBehaviour {
 
 	private float turnTime = 0.5f;
 
-	private GUILayer guilayer;
-	
 	private SelectableObject _selectedObject;
 	public SelectableObject selectedObject
 	{
@@ -57,7 +55,6 @@ public class HUD : MonoBehaviour {
 		player = GetComponent<Player>();
 		style.fontSize = 31;
 		point = new Vector3();
-		guilayer = GetComponent<GUILayer> ();
 	}
 
 	public void Update() {
@@ -133,8 +130,6 @@ public class HUD : MonoBehaviour {
 	}
 
 	private void PlanetWindow (int windowID) {
-		int maxHeight = 0;
-
 		MenuOption[] options = selectedObject.getOptions();
 		for (int i = 0; i < options.Length; i++) {
 			string buttonText = options[i].name;
