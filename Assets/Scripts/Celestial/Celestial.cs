@@ -11,12 +11,13 @@ public abstract class Celestial : SelectableObject {
 	public bool lblShowing = true;
 	public bool permState = false;
 	public bool shouldGeneratePlanets = true;
+	public bool hasBeenSeen = false;
 
 	protected float prob = 50;
 	public float starLabelOffset = 0f;
 	protected float transitionTime = 2f;
 	protected int bodyMass;
-	public int solarOutput;
+	public int solarOutput = 100;
 	protected GameObject nextCelestial;
 	protected float finalScale;
 
@@ -109,7 +110,9 @@ public abstract class Celestial : SelectableObject {
 			changeVel = (transform.localScale.x - finalScale) / transitionTime;
 		}
 		
-		while (growTimer < transitionTime) {
+		while (growTimer < transitionTime && transform.localScale.x != finalScale) {
+			hud.actionEnabled = false;
+
 			growTimer += Time.deltaTime;
 			
 			changeVect.x = changeVect.y = changeVect.z = Mathf.Clamp01(changeVel*growTimer)*(finalScale - transform.localScale.x)+transform.localScale.x;
@@ -120,8 +123,13 @@ public abstract class Celestial : SelectableObject {
 		
 		nextCelestial.GetComponent<Celestial> ().lblShowing = true;
 		Destroy (gameObject);  
+		hud.actionEnabled = true;
 	}
 
+	void OnBecameVisible() {
+		hasBeenSeen = true;
+	}
+	
 	#region implemented abstract members of SelectableObject
 
 	public override string getName ()

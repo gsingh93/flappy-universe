@@ -19,6 +19,8 @@ public class StellarNebula : Celestial {
 		nextStarState = "Star";
 
 		solarOutput = 0;
+
+		turnsLeft = Random.Range (10, 20);
 	}
 	
 	override public void nextState() {

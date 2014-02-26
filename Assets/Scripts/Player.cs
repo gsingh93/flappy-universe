@@ -24,7 +24,6 @@ public class Player : MonoBehaviour {
 
 	public void addCelestialBody(Celestial celest) {
 		celestialBodies.Add(celest);
-//		celest.starTypeStyle.normal.textColor = Color.green;
 	}
 
 	public void turnFinish () {
@@ -33,10 +32,10 @@ public class Player : MonoBehaviour {
 		foreach (Planet p in planets) {
 			resources += p.harvestEnergy();
 		}
-		
+		Celestial c;
 		for (int i=0; i<celestialBodies.Count; i++) {
-			Celestial c = celestialBodies[i];
-			if (!c.permState) {
+			c = celestialBodies[i];
+			if (!c.permState && c.hasBeenSeen) {
 				c.turnsLeft--;
 				if (c.turnsLeft <= 0) {
 					celestialBodies.Remove(c);

@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour {
 	private const int minZoom = -200;
 	public Rect HUDRect = new Rect (10, 10, 225, 250);
 	public const int Dim = 200;
+	public bool actionEnabled = true;
 
 	private float years = 1.0f;
 
@@ -73,13 +74,16 @@ public class HUD : MonoBehaviour {
 			if (startPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
 				Camera.main.transform.position += speed * Vector3.right;
 				startPosition = transform.position;
-			} else if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
+			}
+			if (startPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
 				Camera.main.transform.position += speed * Vector3.left;
 				startPosition = transform.position;
-			} else if (startPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
+			}
+			if (startPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
 				Camera.main.transform.position += speed * Vector3.up;
 				startPosition = transform.position;
-			} else if (startPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
+			}
+			if (startPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
 				Camera.main.transform.position += speed * Vector3.down;
 				startPosition = transform.position;
 			}
@@ -112,11 +116,13 @@ public class HUD : MonoBehaviour {
 				selectedObject = null;
 			}
 		}
-
+		
+		GUI.enabled = actionEnabled;
 		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
 			years += turnTime;
 		}
+		GUI.enabled = true;
 
 		energyLabelStyle.fontSize = 20;
 		string text = "Energy: " + player.resources + " (+" + player.energyPerTurn() + "/Turn)";
