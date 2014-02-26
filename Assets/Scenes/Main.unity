@@ -112,7 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187d1e8f0b6b2f84ab457367339c47c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numSystems: 10
+  solarSystems:
+  - {fileID: 0}
+  - {fileID: 0}
   solarSystemPrefab: {fileID: 11400000, guid: 78909403e23ee41b4a1c1b691eaf5fa7, type: 2}
 --- !u!1 &1197561116
 GameObject:
@@ -128,6 +130,7 @@ GameObject:
   - 81: {fileID: 1197561117}
   - 114: {fileID: 1197561122}
   - 114: {fileID: 1197561123}
+  - 114: {fileID: 1197561124}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -353,6 +356,17 @@ MonoBehaviour:
   planets: []
   solarSystems: []
   celestialBodies: []
+--- !u!114 &1197561124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197561116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e8b38cef742a74bb675e7d14f79f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0

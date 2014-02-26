@@ -31,7 +31,7 @@ public class GenerateUniverse : MonoBehaviour {
 		}
 	}
 	
-	public int numSystems = 2;
+	public int numSystems = 10;
 	public SolarSystem solarSystemPrefab;
 
 	private HashSet<string> points = new HashSet<string>();
@@ -58,7 +58,5 @@ public class GenerateUniverse : MonoBehaviour {
 			s.transform.parent = transform;
 			s.transform.position = new Vector3(point.x * cellSize - HUD.Dim, point.y * cellSize - HUD.Dim, 0);
 		}
-
-
 	}
 }

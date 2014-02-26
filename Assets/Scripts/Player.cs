@@ -12,14 +12,18 @@ public class Player : MonoBehaviour {
 	public List<Celestial> celestialBodies;
 	
 	public void claimPlanet(Planet planet) {
-		planets.Add (planet);
+		planets.Add(planet);
 		planet.claimed = true;
 
-		solarSystems.Add (planet.transform.parent.gameObject);
+		GameObject s = planet.transform.parent.gameObject;
+		if (!solarSystems.Contains(s)) {
+			solarSystems.Add(s);
+		}
 
-		Celestial tmp = planet.transform.parent.GetComponentInChildren<Celestial> ();
-		if (tmp.turnsLeft > 2)
+		Celestial tmp = planet.transform.parent.GetComponentInChildren<Celestial>();
+		if (tmp.turnsLeft > 2) {
 			tmp.starTypeStyle.normal.textColor = Color.green;
+		}
 	}
 
 	public void addCelestialBody(Celestial celest) {
