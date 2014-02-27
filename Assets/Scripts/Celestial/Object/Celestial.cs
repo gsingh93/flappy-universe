@@ -100,30 +100,24 @@ public abstract class Celestial : SelectableObject {
 	}
 	
 	protected virtual IEnumerator growStar(float finalScale) {
-		float growTimer = 0f;
-		Vector3 changeVect = new Vector3();
+		hud.actionEnabled = false;
 
-		float changeVel;
-		if (finalScale > transform.localScale.x) {
-			changeVel = (finalScale - transform.localScale.x) / transitionTime;
-		} else {
-			changeVel = (transform.localScale.x - finalScale) / transitionTime;
-		}
-		
-		while (growTimer < transitionTime && transform.localScale.x != finalScale) {
-			hud.actionEnabled = false;
+		float timePassed = 0;
+		float percentPassed = 0;
+		float scaleDifference = finalScale - transform.localScale.x;
+		(nextCelestial.GetComponent("Halo") as Behaviour).enabled = false;
+		while (timePassed < transitionTime) {
+			timePassed += Time.deltaTime;
+			percentPassed = timePassed / transitionTime;
 
-			growTimer += Time.deltaTime;
-			
-			changeVect.x = changeVect.y = changeVect.z = Mathf.Clamp01(changeVel * growTimer) *
-						(finalScale - transform.localScale.x) + transform.localScale.x;
-			nextCelestial.transform.localScale = changeVect;
-			
+			nextCelestial.transform.localScale = (transform.localScale.x + percentPassed * scaleDifference) * Vector3.one;
+
 			yield return null;
 		}
 
-		nextCelestial.GetComponent<Celestial> ().lblShowing = true;
-		Destroy (gameObject);  
+		(nextCelestial.GetComponent("Halo") as Behaviour).enabled = true;
+		nextCelestial.GetComponent<Celestial>().lblShowing = true;
+		Destroy(gameObject);  
 		hud.actionEnabled = true;
 	}
 
