@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
+
+	public GenerateUniverse universe;
 	
 	public int turnNumber = 0;
 	public int resources = 50;
@@ -10,7 +12,7 @@ public class Player : MonoBehaviour {
 	public List<Planet> planets;
 	public List<GameObject> solarSystems;
 	public List<Celestial> celestialBodies;
-	
+
 	public void claimPlanet(Planet planet) {
 		planets.Add(planet);
 		planet.claimed = true;
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+
+		universe.ExpandUniverse ();
 	}
 
 	public int energyPerTurn() {

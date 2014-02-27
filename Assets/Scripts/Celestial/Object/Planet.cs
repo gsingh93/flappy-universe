@@ -77,7 +77,7 @@ public class Planet : SelectableObject {
 		s.name = "DummySolarPanel";
 		dummyResources.Add(s);
 
-		CreateRing();
+		//CreateRing();
 	}
 
 	public void CreateRing() {
