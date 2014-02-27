@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 
-	private const int buttonWidth = 185;
+	private const int buttonWidth = 220;
 	private const int maxZoom = -10;
 	private const int minZoom = -200;
 	public Rect HUDRect;
@@ -150,7 +150,7 @@ public class HUD : MonoBehaviour {
 				GUI.enabled = false;
 			}
 			float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
-			if (GUI.Button(new Rect (20, 80 + 40 * (i + 1), buttonWidth, height), buttonText)) {
+			if (GUI.Button(new Rect (15, 80 + 40 * (i + 1), buttonWidth, height), buttonText)) {
 				selectedObject.OnOptionSelected(options[i]);
 			}
 			GUI.enabled = true;
