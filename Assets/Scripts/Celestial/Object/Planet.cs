@@ -177,10 +177,12 @@ public class Planet : SelectableObject {
 	}
 
 	private void PlaceResource(Resource r) {
-		float rad = (transform.eulerAngles.z + 90 * resources.Count) * Mathf.Deg2Rad;
-		Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.5f, Mathf.Sin(rad) * 0.5f, 0);
+		float deg = (transform.eulerAngles.z + 90 * (resources.Count));
+		float rad = deg * Mathf.Deg2Rad;
+		Vector3 pos = new Vector3(Mathf.Cos(rad) * 0.6f, Mathf.Sin(rad) * 0.5f, -0.3f);
 		r.transform.position = transform.position + pos;
 		r.transform.eulerAngles = transform.eulerAngles;
+		r.transform.localEulerAngles = new Vector3(0, 0, deg - 90);
 		r.transform.parent = transform;
 	}
 
