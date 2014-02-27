@@ -10,5 +10,7 @@ public class Star : Celestial {
 		starLabelOffset = 2.33f;
 
 		solarOutput = 100;
+
+		turnsLeft = Random.Range (7, 15);
 	}
 }

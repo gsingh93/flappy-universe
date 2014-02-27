@@ -10,5 +10,7 @@ public class MassiveStar : Celestial {
 		starLabelOffset = 0.57f;
 	
 		solarOutput = 150;
+
+		turnsLeft = Random.Range (7, 20);
 	}
 }

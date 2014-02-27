@@ -7,7 +7,7 @@ public class SolarPanel : Resource {
 	private SolarSystem solarSystem;
 
 	public void Start() {
-		solarSystem = transform.parent.parent.GetComponent<SolarSystem> ();
+//		solarSystem = transform.parent.parent.GetComponent<SolarSystem> ();
 	}
 
 	public override int harvestResources(Planet p, bool dryRun) {
@@ -15,6 +15,8 @@ public class SolarPanel : Resource {
 			r = p.GetComponent<Revolve>();
 		}
 		float radius = r.radius;
+
+		solarSystem = transform.parent.parent.GetComponent<SolarSystem> ();
 		return (int) (solarSystem.getSolarOutput() * 0.4f / Mathf.Sqrt(radius));
 	}
 

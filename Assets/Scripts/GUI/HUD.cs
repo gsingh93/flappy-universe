@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour {
 	private const int minZoom = -200;
 	public Rect HUDRect;
 	public const int Dim = 200;
+	public bool actionEnabled = true;
 
 	public float u = 0.5f;
 	public float speed = 0.25f;
@@ -64,19 +65,21 @@ public class HUD : MonoBehaviour {
 				cameraPosition = pos;
 			}
 
-			// Horizontal and vertical movement
 			if (cameraPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
-				pos += speed * Vector3.right;
-				cameraPosition = pos;
-			} else if (cameraPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
-				pos += speed * Vector3.left;
-				cameraPosition = pos;
-			} else if (cameraPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
-				pos += speed * Vector3.up;
-				cameraPosition = pos;
-			} else if (cameraPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
-				pos += speed * Vector3.down;
-				cameraPosition = pos;
+				Camera.main.transform.position += speed * Vector3.right;
+				cameraPosition = transform.position;
+			}
+			if (cameraPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
+				Camera.main.transform.position += speed * Vector3.left;
+				cameraPosition = transform.position;
+			}
+			if (cameraPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
+				Camera.main.transform.position += speed * Vector3.up;
+				cameraPosition = transform.position;
+			}
+			if (cameraPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
+				Camera.main.transform.position += speed * Vector3.down;
+				cameraPosition = transform.position;
 			}
 
 			Camera.main.transform.position = pos;
@@ -113,11 +116,13 @@ public class HUD : MonoBehaviour {
 				selectedObject = null;
 			}
 		}
-
+		
+		GUI.enabled = actionEnabled;
 		if (GUI.Button(new Rect(Screen.width - 110, Screen.height - 30, 100, 20), "Advance Turn")) {
 			player.turnFinish();
 			years += turnTime;
 		}
+		GUI.enabled = true;
 
 		// Draw information labels
 		string text = "Energy: " + player.resources + " (+" + player.energyPerTurn() + "/Turn)";

@@ -12,10 +12,13 @@ public class Planet : SelectableObject {
 	public SolarPanel solarPanelPrefab;
 	public Mine minePrefab;
 	public Ship shipPrefab;
+
+	private List<Ship> planetShips = new List<Ship>();
 	
 	public Texture[] textures;
 
 	private static MenuOption FLY_TO_PLANET_OPTION = new MenuOption("Fly To Planet", 50);
+	private static MenuOption OPTION_TRAVEL = new MenuOption ("Claim a new planet.", 0);
 
 	private bool _claimed;
 	public bool claimed {
@@ -154,8 +157,14 @@ public class Planet : SelectableObject {
 		if (claimed) {
 			// Build stuff on inhabited planet
 			if (resources.Count < totalSlots) {
+				if (planetShips.Count > 0) {
+					return new MenuOption[] {options[0], options[1], options[2], OPTION_TRAVEL};
+				}
 				return options;
 			} else {
+				if (planetShips.Count > 0) {
+					return new MenuOption[] {planetFullOptions[0], planetFullOptions[1], planetFullOptions[2], OPTION_TRAVEL};
+				}
 				return planetFullOptions;
 			}
 		} else if (hud.shipToPickDestinationFor != null) {
@@ -196,12 +205,19 @@ public class Planet : SelectableObject {
 			Ship ship = Instantiate(shipPrefab) as Ship;
 			ship.transform.position = transform.position;
 			ship.transform.parent = this.transform;
+			planetShips.Add(ship);
 		} else if (option == FLY_TO_PLANET_OPTION) {
 			Ship ship = hud.shipToPickDestinationFor;
 			hud.shipToPickDestinationFor = null;
 			Destroy(ship.gameObject);
 			player.claimPlanet(this);
+		} else if (option == OPTION_TRAVEL) {
+			hud.PickPlanet(planetShips[0]);
+			planetShips.Remove(planetShips[0]);
+			planetShips.TrimExcess();
 		}
 	}
+
+
 	#endregion
 }

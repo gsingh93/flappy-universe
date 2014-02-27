@@ -36,10 +36,11 @@ public class Player : MonoBehaviour {
 		foreach (Planet p in planets) {
 			resources += p.harvestEnergy();
 		}
-		
-		for (int i = 0; i < celestialBodies.Count; i++) {
-			Celestial c = celestialBodies[i];
-			if (!c.permState) {
+
+		Celestial c;
+		for (int i=0; i<celestialBodies.Count; i++) {
+			c = celestialBodies[i];
+			if (!c.permState && c.hasBeenSeen) {
 				c.turnsLeft--;
 				if (c.turnsLeft <= 0) {
 					celestialBodies.Remove(c);
