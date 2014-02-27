@@ -11,6 +11,5 @@ public class Star : Celestial {
 
 		solarOutput = 100;
 
-		turnsLeft = Random.Range (7, 15);
 	}
 }
