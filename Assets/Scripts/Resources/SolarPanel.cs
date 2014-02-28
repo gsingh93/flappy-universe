@@ -7,7 +7,7 @@ public class SolarPanel : Resource {
 	private SolarSystem solarSystem;
 
 	public void Start() {
-//		solarSystem = transform.parent.parent.GetComponent<SolarSystem> ();
+		solarSystem = transform.parent.parent.GetComponent<SolarSystem> ();
 	}
 
 	public override int harvestResources(Planet p, bool dryRun) {

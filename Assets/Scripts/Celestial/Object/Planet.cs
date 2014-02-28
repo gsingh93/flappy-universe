@@ -206,15 +206,15 @@ public class Planet : SelectableObject {
 			ship.transform.position = transform.position;
 			ship.transform.parent = this.transform;
 			planetShips.Add(ship);
+			ship.IAmYourFather = this;
 		} else if (option == FLY_TO_PLANET_OPTION) {
 			Ship ship = hud.shipToPickDestinationFor;
 			hud.shipToPickDestinationFor = null;
+			ship.IAmYourFather.planetShips.Remove(ship);
 			Destroy(ship.gameObject);
 			player.claimPlanet(this);
-		} else if (option == OPTION_TRAVEL) {
+		} else if (option == OPTION_TRAVEL) {	
 			hud.PickPlanet(planetShips[0]);
-			planetShips.Remove(planetShips[0]);
-			planetShips.TrimExcess();
 		}
 	}
 

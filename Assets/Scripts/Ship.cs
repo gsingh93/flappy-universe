@@ -4,6 +4,7 @@ using System.Collections;
 public class Ship : SelectableObject {
 
 	private static MenuOption OPTION_TRAVEL = new MenuOption ("Claim a new planet.", 0);
+	public Planet IAmYourFather;
 
 	private void Update() {
 		Vector3 displacement = transform.position - transform.parent.position;

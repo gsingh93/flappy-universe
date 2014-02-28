@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 
-	private const int buttonWidth = 220;
+	private const int buttonWidth = 230;
 	private const int maxZoom = -10;
 	private const int minZoom = -200;
 	public Rect HUDRect;
@@ -32,6 +32,7 @@ public class HUD : MonoBehaviour {
 	}
 
 	public GUIStyle style = new GUIStyle();
+	public GUIStyle planetWindowStyle;
 	public GUIStyle energyLabelStyle = new GUIStyle();
 
 	public Ship shipToPickDestinationFor;
@@ -107,8 +108,13 @@ public class HUD : MonoBehaviour {
 			                                             new Vector3(t.localScale.x / 1.2f, -1.5f * t.localScale.y, 0));
 			HUDRect.x = pos.x;
 			HUDRect.y = pos.y;
+			planetWindowStyle = new GUIStyle(GUI.skin.window);
+			planetWindowStyle.wordWrap = true;
+			planetWindowStyle.fontSize = 14;
+
+//			planetWindowStyle.padding = new RectOffset (5, 5, 5, 5);
 			HUDRect = GUI.Window(1, HUDRect, PlanetWindow,
-			                     selectedObject.getName() + "\n\n" + selectedObject.getDescription() + "\n");
+			                     selectedObject.getName() + "\n\n" + selectedObject.getDescription() + "\n", planetWindowStyle);
 
 			// Dismiss window when click outside HUD
 			Event e = Event.current;
@@ -140,7 +146,12 @@ public class HUD : MonoBehaviour {
 
 	private void PlanetWindow(int windowID) {
 		// Display all options in window
+		style = new GUIStyle(GUI.skin.button);
+		style.wordWrap = true;
+		style.fontSize = 14;
+		style.padding = new RectOffset (5, 5, 5, 5);
 		MenuOption[] options = selectedObject.getOptions();
+		HUDRect.height = 130;
 		for (int i = 0; i < options.Length; i++) {
 			string buttonText = options[i].name;
 			if (options[i].cost > 0) {
@@ -150,16 +161,12 @@ public class HUD : MonoBehaviour {
 				GUI.enabled = false;
 			}
 			float height = style.CalcHeight(new GUIContent(buttonText), buttonWidth);
-			if (GUI.Button(new Rect (15, 80 + 40 * (i + 1), buttonWidth, height), buttonText)) {
+			if (GUI.Button(new Rect (10, HUDRect.height, buttonWidth, height), buttonText, style)) {
 				selectedObject.OnOptionSelected(options[i]);
 			}
 			GUI.enabled = true;
 
-			HUDRect.height = 135 + 40 * (i + 1);
-		}
-
-		if (options.Length == 0) {
-			HUDRect.height = 105;
+			HUDRect.height += (height + 10f);
 		}
 	}
 }
