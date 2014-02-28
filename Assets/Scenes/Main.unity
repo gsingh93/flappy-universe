@@ -364,6 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e8b38cef742a74bb675e7d14f79f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSolarSystem: -1
+  currentPlanet: 0
 --- !u!1 &1584683032
 GameObject:
   m_ObjectHideFlags: 0

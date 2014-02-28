@@ -136,7 +136,7 @@ public class Planet : SelectableObject {
 		return sb.ToString();
 	}
 
-	protected override void OnMouseDown() {
+	public override void OnMouseDown() {
 		base.OnMouseDown ();
 		if (hud.shipToPickDestinationFor != null) {
 			Ship ship = hud.shipToPickDestinationFor;

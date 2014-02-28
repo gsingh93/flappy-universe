@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class Keybindings : MonoBehaviour {
 	private Player player;
 	private HUD hud;
-	private int currentSolarSystem = -1;
-	private int currentPlanet = -1;
+	public int currentSolarSystem = -1;
+	public int currentPlanet = 0;
 
 	private void Start() {
 		player = GetComponent<Player>() as Player;
@@ -15,28 +15,34 @@ public class Keybindings : MonoBehaviour {
 
 	private void Update() {
 		if (Input.GetKeyDown(KeyCode.Tab)) {
-			if (Camera.main.transform.position.z > -30) {
+			if (currentSolarSystem == -1 && player.solarSystems.Count > 0) {
+				currentSolarSystem = 0;
+			}
+
+			if (currentSolarSystem == -1) {
+				return;
+			}
+			if (Camera.main.transform.position.z >= -30) {
 				// Cycle between planets
-				if (currentPlanet == -1 && player.planets.Count > 0) {
-					currentPlanet = 0;
-				}
-				if (currentSolarSystem != -1) {
-					currentSolarSystem = (currentSolarSystem + 1) % player.solarSystems.Count;
-					GameObject s = player.solarSystems[currentSolarSystem];
-					hud.cameraPosition = s.transform.position;
-					hud.cameraPosition.z = -30;
+				SolarSystem s = player.solarSystems[currentSolarSystem].GetComponent<SolarSystem>();
+
+				// Loop through all planets starting from the current one until you find one that's claimed
+				for (int i = 1; i < s.planets.Count + 1; i++) {
+					int index = (currentPlanet + i) % s.planets.Count;
+					if (s.planets[index].claimed == true) {
+						hud.selectedObject = s.planets[index];
+						s.planets[index].OnMouseDown();
+						currentPlanet = index;
+						break;
+					}
 				}
 			} else {
 				// Cycle between solar systems
-				if (currentSolarSystem == -1 && player.solarSystems.Count > 0) {
-					currentSolarSystem = 0;
-				}
-				if (currentSolarSystem != -1) {
-					currentSolarSystem = (currentSolarSystem + 1) % player.solarSystems.Count;
-					GameObject s = player.solarSystems[currentSolarSystem];
-					hud.cameraPosition = s.transform.position;
-					hud.cameraPosition.z = -30;
-				}
+				currentSolarSystem = (currentSolarSystem + 1) % player.solarSystems.Count;
+				GameObject s = player.solarSystems[currentSolarSystem];
+				hud.cameraPosition = s.transform.position;
+				hud.cameraPosition.z = -31;
+				currentPlanet = 0;
 			}
 		}
 	}
