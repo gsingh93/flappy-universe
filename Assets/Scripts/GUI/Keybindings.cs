@@ -30,7 +30,6 @@ public class Keybindings : MonoBehaviour {
 				for (int i = 1; i < s.planets.Count + 1; i++) {
 					int index = (currentPlanet + i) % s.planets.Count;
 					if (s.planets[index].claimed == true) {
-						hud.selectedObject = s.planets[index];
 						s.planets[index].OnMouseDown();
 						currentPlanet = index;
 						break;
