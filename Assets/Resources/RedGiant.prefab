@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
+  minTurns: 5
+  maxTurns: 7
   stateType: RedGiant
   turnsLeft: 5
   starLabelStyle:
@@ -275,6 +277,7 @@ MonoBehaviour:
   lblShowing: 1
   permState: 0
   shouldGeneratePlanets: 1
+  hasBeenSeen: 0
   starLabelOffset: 0
   solarOutput: 0
 --- !u!114 &11400002
@@ -299,7 +302,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4278213375
-  m_Size: 4
+  m_Size: 5.69999981
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

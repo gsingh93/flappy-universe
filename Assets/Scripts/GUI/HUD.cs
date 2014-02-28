@@ -57,29 +57,32 @@ public class HUD : MonoBehaviour {
 		if (selectedObject == null) {
 			Vector3 pos = Camera.main.transform.position;
 
+			float actualSpeed = speed;
+			actualSpeed *= Camera.main.transform.position.z / maxZoom;
+
 			// Zooming
 			if (cameraPosition.z < maxZoom && Input.GetKey(KeyCode.Z)) {
-				pos += Vector3.forward;
+				pos += actualSpeed * Vector3.forward;
 				cameraPosition = pos;
 			} else if (cameraPosition.z > minZoom && Input.GetKey(KeyCode.X)) {
-				pos += Vector3.back;
+				pos += actualSpeed * Vector3.back;
 				cameraPosition = pos;
 			}
 
 			if (cameraPosition.x < Dim && Input.GetAxis("Horizontal") > 0) {
-				Camera.main.transform.position += speed * Vector3.right;
+				Camera.main.transform.position += actualSpeed * Vector3.right;
 				cameraPosition = transform.position;
 			}
 			if (cameraPosition.x > -1 * Dim && Input.GetAxis("Horizontal") < 0) {
-				Camera.main.transform.position += speed * Vector3.left;
+				Camera.main.transform.position += actualSpeed * Vector3.left;
 				cameraPosition = transform.position;
 			}
 			if (cameraPosition.y < Dim && Input.GetAxis("Vertical") > 0) {
-				Camera.main.transform.position += speed * Vector3.up;
+				Camera.main.transform.position += actualSpeed * Vector3.up;
 				cameraPosition = transform.position;
 			}
 			if (cameraPosition.y > -1 * Dim && Input.GetAxis("Vertical") < 0) {
-				Camera.main.transform.position += speed * Vector3.down;
+				Camera.main.transform.position += actualSpeed * Vector3.down;
 				cameraPosition = transform.position;
 			}
 

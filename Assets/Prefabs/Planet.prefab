@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
   planetName: Mercury
+  ringPrefab: {fileID: 11400000, guid: 843c0f1290a8d3546b5c4b4acd5dc06a, type: 2}
   solarPanelPrefab: {fileID: 11400000, guid: 609f8b54f7b1713428fa4f74119983c4, type: 2}
   minePrefab: {fileID: 11400000, guid: e25bf509efcfd418d99b9472fa7ca7cd, type: 2}
   shipPrefab: {fileID: 11400002, guid: dbf315e6e18d3478fb29b270b403b819, type: 2}

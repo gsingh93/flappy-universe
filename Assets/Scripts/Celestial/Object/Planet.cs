@@ -9,6 +9,7 @@ public class Planet : SelectableObject {
 	public const float maxSpeed = 0.2f;
 	public const float minSpeed = 2f;
 
+	public Ring ringPrefab;
 	public SolarPanel solarPanelPrefab;
 	public Mine minePrefab;
 	public Ship shipPrefab;
@@ -77,6 +78,15 @@ public class Planet : SelectableObject {
 		s.name = "DummySolarPanel";
 		dummyResources.Add(s);
 
+		Ring r = Instantiate(ringPrefab) as Ring;
+		r.planet = this;
+		r.transform.parent = transform.parent;
+		r.transform.position = transform.parent.position;
+		r.transform.localScale *= GetComponent<Revolve>().radius;
+		Vector3 scale = r.transform.localScale;
+		scale.z = 1;
+		r.transform.localScale = scale;
+
 		CreateRing();
 	}
 
@@ -136,7 +146,7 @@ public class Planet : SelectableObject {
 		return sb.ToString();
 	}
 
-	protected override void OnMouseDown() {
+	public override void OnMouseDown() {
 		base.OnMouseDown ();
 		if (hud.shipToPickDestinationFor != null) {
 			Ship ship = hud.shipToPickDestinationFor;
@@ -217,7 +227,6 @@ public class Planet : SelectableObject {
 			hud.PickPlanet(planetShips[0]);
 		}
 	}
-
 
 	#endregion
 }
