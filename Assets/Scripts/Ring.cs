@@ -6,7 +6,6 @@ public class Ring : MonoBehaviour {
 
 	private void OnMouseDown() {
 		if (Camera.main.transform.position.z < -9) { // Hack
-			Debug.Log(planet.getName());
 			planet.OnMouseDown();
 		}
 	}

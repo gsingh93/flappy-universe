@@ -201,23 +201,25 @@ public class Planet : SelectableObject {
 			return;
 		}
 
-		player.resources -= option.cost;
-
 		if (option.name == OPTION_BUILD_MINE && resources.Count < totalSlots) {
+			player.resources -= option.cost;
 			Mine mine = Instantiate(minePrefab) as Mine;
 			PlaceResource(mine);
 			resources.Add(mine);
 		} if (option.name == OPTION_BUILD_SOLAR_PANEL  && resources.Count < totalSlots) {
+			player.resources -= option.cost;
 			SolarPanel panel = Instantiate(solarPanelPrefab) as SolarPanel;
 			PlaceResource(panel);
 			resources.Add(panel);
 		} else if (option.name == OPTION_BUILD_SHIP) {
+			player.resources -= option.cost;
 			Ship ship = Instantiate(shipPrefab) as Ship;
 			ship.transform.position = transform.position;
 			ship.transform.parent = this.transform;
 			planetShips.Add(ship);
 			ship.IAmYourFather = this;
 		} else if (option == FLY_TO_PLANET_OPTION) {
+			player.resources -= option.cost;
 			Ship ship = hud.shipToPickDestinationFor;
 			hud.shipToPickDestinationFor = null;
 			ship.IAmYourFather.planetShips.Remove(ship);
